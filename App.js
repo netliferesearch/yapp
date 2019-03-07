@@ -29,7 +29,7 @@ const RootStack = createStackNavigator(
     MeetupCreate: MeetupCreateScreen,
   },
   {
-    initialRouteName: "Signup",
+    initialRouteName: "MeetupList",
     defaultNavigationOptions: {
       headerLeft: null,
       headerStyle: {

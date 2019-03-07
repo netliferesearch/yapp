@@ -3,6 +3,7 @@ const theme = {
     yummyPink: '#FCF0EE',
     yellingRed: '#DD1215',
     yetiWhite: '#FFFFFF',
+    babyBlue: '#0000FF',
   },
 }
 
