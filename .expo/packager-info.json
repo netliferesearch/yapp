@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://f7-grj.anonymous.yapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.f7-grj.anonymous.yapp.exp.direct",
-  "ngrokPid": 12522,
+  "expoServerNgrokUrl": "https://nn-urr.anonymous.yapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.nn-urr.anonymous.yapp.exp.direct",
+  "ngrokPid": 12970,
   "devToolsPort": 19002,
-  "packagerPort": 19004,
-  "packagerPid": 12506
+  "packagerPort": 19003,
+  "packagerPid": 12934
 }

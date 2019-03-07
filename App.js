@@ -4,8 +4,9 @@ import {
 	SafeAreaView,
 	StatusBar,
 } from 'react-native';
-
 import { Provider } from 'react-redux';
+import Store from './Store';
+
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 // Import screens
@@ -32,9 +33,7 @@ export default class App extends React.Component {
 		return (
 			<Provider store={Store}>
         <StatusBar barStyle="dark-content"/>
-        <SafeAreaView>
-          <AppContainer />
-        </SafeAreaView>
+        <AppContainer />
 			</Provider>
 		);
 	}
