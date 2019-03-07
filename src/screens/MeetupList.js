@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, TouchableHighlight } from "react-native";
+import { View, Text, FlatList, TouchableHighlight, StyleSheet } from "react-native";
 
 const eventsList = [
   { id: '001', subject:'Google Design Sprint', attendees:[{id:'123'}, {id:'143'}, {id:'323'}], location:'Bord 1', time:{ start:'14:30', end:'15:00' }, creator:'Bruce Wayne', attendeeLimit:0, description:'Vi snakker om GDS, kom kom!', tags:['Google Design Sprint', 'Metodikk', 'Design'] },
