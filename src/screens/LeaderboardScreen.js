@@ -4,7 +4,8 @@ import { View, Text, Button } from "react-native";
 export default class LeaderboardScreen extends React.Component {
     render() {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#F80303', color: 'white'}}>
+        <View style={styles}>
+        {/* <HeaderComponent /> */}
           <Text>Tatsumi has taken the lead!</Text>
           <Button
             title="Go to the Homescreen"
@@ -14,3 +15,11 @@ export default class LeaderboardScreen extends React.Component {
       );
     }
   }
+
+const styles = { 
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    backgroundColor: '#F3C1C1', 
+    color: '#F80303'
+};
