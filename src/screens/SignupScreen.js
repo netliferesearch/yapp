@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
-
+import Logo from '../images/logo';
 import theme from '../styles/theme';
 
 const styles = StyleSheet.create({
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: theme.colors.yummyPink,
   },
+  // TODO: remove input styles and create separate input component.
   input: {
     width: '100%',
     height: 40,
@@ -21,13 +22,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderLeftWidth: 0,
     backgroundColor: theme.colors.yetiWhite,
+  },
+  logoWrapper: {
+    textAlign: 'center',
   }
 });
 
 export default class SignupScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: 'Useless Placeholder' };
+    this.state = { 
+      text: ''
+    };
   }
 
   componentDidMount() {
@@ -36,8 +42,10 @@ export default class SignupScreen extends React.Component {
   render() {
     return (
       <View style={styles.screenWrapper}>
-        <Text>YAPP!</Text>
-        <Text>What's in it for me.</Text>
+        <View style={styles.logoWrapper}>
+          <Logo/>
+        </View>
+        <Text>What's in it for me text.</Text>
         <Text>Badge id</Text>
         <TextInput
           style={styles.input}
