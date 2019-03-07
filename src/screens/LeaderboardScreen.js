@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
+import theme from '../styles/theme';
 
 import Header from '../components/Header/header';
 
@@ -36,6 +37,6 @@ const styles = {
     flex: 1, 
     alignItems: 'center', 
     justifyContent: 'center', 
-    backgroundColor: '#F3C1C1', 
+    backgroundColor: theme.colors.yummyPink, 
     color: '#F80303'
 };

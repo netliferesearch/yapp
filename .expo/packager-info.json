@@ -1,6 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://ev-3s6.anonymous.yapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.ev-3s6.anonymous.yapp.exp.direct",
+  "ngrokPid": 21211,
+  "devToolsPort": 19002,
+  "packagerPort": 19005,
+  "packagerPid": 21180
 }

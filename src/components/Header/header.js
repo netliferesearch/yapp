@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
+import Logo from '../../images/logo';
+import theme from '../../styles/theme';
 
 
 export default class Header extends React.Component {
@@ -19,7 +21,7 @@ export default class Header extends React.Component {
       const title = this.state.title;
       return (
         <View style={styles}>
-          <Text style={styles.netlifeY}>{title}</Text>
+          <Logo></Logo>
         </View>
       );
     }
@@ -28,7 +30,7 @@ const styles = {
     flex: 1, 
     alignItems: 'center', 
     justifyContent: 'center', 
-    backgroundColor: '#F3C1C1', 
+    backgroundColor: theme.colors.yummyPink, 
     color: '#F80303'
 }
   

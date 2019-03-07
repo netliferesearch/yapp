@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import Header from '../components/Header/header';
+import theme from '../styles/theme';
 
 
 export default class HomeScreen extends React.Component {
@@ -10,8 +11,7 @@ export default class HomeScreen extends React.Component {
 
     render() {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#F80303', color: '#fff'}}>
-          <Text style={{color: 'white', fontSize: 105, fontFamily: 'NetlifeY'}}>YAPP!</Text>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.yummyPink, color: '#fff'}}>
           <Button
             title="Go to the Leaderboard"
             onPress={() => this.props.navigation.navigate('Leaderboard')}

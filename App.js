@@ -8,6 +8,7 @@ import {
 import { Provider } from 'react-redux';
 import { Font, AppLoading } from 'expo';
 import Store from './Store';
+import theme from './src/styles/theme';
 
 import { createStackNavigator, createAppContainer, createBottomTabNavigator, createDrawerNavigator, createSwitchNavigator } from "react-navigation";
 
@@ -31,7 +32,7 @@ const RootStack = createStackNavigator(
         shadowOpacity: 0,
         borderBottomWidth: 0,
         height: 120,
-        backgroundColor: '#F3C1C1' 
+        backgroundColor: theme.colors.yummyPink
        }
     }
   }
