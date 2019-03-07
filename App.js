@@ -1,21 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import Store from './Store';
+import Start from './src/components/Start';
+// React Native
+import {
+	SafeAreaView,
+	StatusBar,
+} from 'react-native';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
+	render() {
+		return (
+			<Provider store={Store}>
+        <StatusBar barStyle="dark-content"/>
+        <SafeAreaView>
+          {/* Add stack navigation here */}
+          <Start />
+        </SafeAreaView>
+			</Provider>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
