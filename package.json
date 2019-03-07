@@ -15,7 +15,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "react-navigation": "^3.3.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
