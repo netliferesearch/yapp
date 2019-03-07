@@ -2,8 +2,7 @@ import './firebaseConfig';
 //import * as firebase from 'firebase';
 import React from 'react';
 import {
-	SafeAreaView,
-	StatusBar,
+  StatusBar,
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { Font, AppLoading } from 'expo';
@@ -12,19 +11,18 @@ import Store from './Store';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 // Import screens
+import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LeaderboardScreen from './src/screens/LeaderboardScreen';
 
-// Start has redux. Remove this file.
-// import Start from './src/components/Start';
-
 const RootStack = createStackNavigator(
   {
+    Signup: SignupScreen,
     Home: HomeScreen,
     Leaderboard: LeaderboardScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Signup'
   }
 );
 
