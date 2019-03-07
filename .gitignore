@@ -1,4 +1,3 @@
 node_modules/*
-
-# Local settings
-.expo/*
+#expo
+.expo/

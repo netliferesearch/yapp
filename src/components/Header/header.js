@@ -1,23 +1,34 @@
-import React from 'react';
-import { Image, Text, View, Header } from 'react-native';
-import * as yappLogo from '../../../assets/logo.svg';
+import React from "react";
+import { View, Text, Button } from "react-native";
 
-const HeaderComponent = ({}) => {
-    return (
-        <View>
-            <Header>
-                <Text>You may call me Header</Text>
-            </Header>
+
+export default class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: ''
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            title: this.props.title
+        })
+    }
+    render() {
+      const title = this.state.title;
+      return (
+        <View style={styles}>
+          <Text style={styles.netlifeY}>{title}</Text>
         </View>
-    );
-};
-
+      );
+    }
+  }
 const styles = {
-    backgroundColor: 'blue',
-    justifyContent: 'flex-start',
-    color: '#ffffff',
-    alignItems: 'center',
-    height: 100
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    backgroundColor: '#F3C1C1', 
+    color: '#F80303'
 }
-
-export default HeaderComponent;
+  
