@@ -10,6 +10,10 @@ export default class HomeScreen extends React.Component {
             title="Go to the Leaderboard"
             onPress={() => this.props.navigation.navigate('Leaderboard')}
           />
+          <Button
+            title="Go to the Meetup List"
+            onPress={() => this.props.navigation.navigate('MeetupList')}
+          />
         </View>
       );
     }
