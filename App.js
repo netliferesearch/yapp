@@ -2,12 +2,12 @@ import './firebaseConfig';
 import React from 'react';
 import {
 	SafeAreaView,
-	StatusBar,
+  StatusBar
 } from 'react-native';
 import { Provider } from 'react-redux';
 import Store from './Store';
 
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, createDrawerNavigator, createSwitchNavigator } from "react-navigation";
 
 // Import screens
 import HomeScreen from './src/screens/HomeScreen';
@@ -22,8 +22,18 @@ const RootStack = createStackNavigator(
     Leaderboard: LeaderboardScreen
   },
   {
-    initialRouteName: "Home"
-  }
+    initialRouteName: "Home",
+    defaultNavigationOptions: {
+      headerLeft: null,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+        height: 120,
+        backgroundColor: '#F3C1C1' 
+      }
+    },
+  },
 );
 
 const AppContainer = createAppContainer(RootStack);
