@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import './firebaseConfig';
+>>>>>>> master
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
