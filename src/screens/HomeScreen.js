@@ -13,16 +13,16 @@ export default class HomeScreen extends React.Component {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#F80303', color: '#fff'}}>
           <Text style={{color: 'white', fontSize: 105, fontFamily: 'NetlifeY'}}>YAPP!</Text>
           <Button
-            title="Go to the Leaderboard"
-            onPress={() => this.props.navigation.navigate('Leaderboard')}
-          />
-          <Button
             title="Go to the Meetup List"
             onPress={() => this.props.navigation.navigate('MeetupList')}
           />
           <Button
-            title="Go to the Meetup List"
-            onPress={() => this.props.navigation.navigate('MeetupList')}
+            title="Go to the Meetup Create"
+            onPress={() => this.props.navigation.navigate('MeetupCreate')}
+          />
+          <Button
+            title="Go to the Meetup Event"
+            onPress={() => this.props.navigation.navigate('MeetupEvent')}
           />
         </View>
       );

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 import theme from '../styles/theme';
 
@@ -43,6 +43,10 @@ export default class SignupScreen extends React.Component {
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
+        />
+        <Button
+          title="Go to the Home Screen"
+          onPress={() => this.props.navigation.navigate('Home')}
         />
       </View>
     );
