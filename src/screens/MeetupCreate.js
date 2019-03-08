@@ -44,8 +44,12 @@ export default class MeetupCreate extends React.Component {
       >
         <Input
           placeholder="INPUT WITH ICON"
-          leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
-          onChangeText={this.createEvent}
+          leftIcon={{ type: "font-awesome", name: "chevron-left" }}
+          onChangeText={title =>
+            this.setState({
+              event: { ...this.state.event, title }
+            })
+          }
         />
         <Text>Create a meetup here!</Text>
         <Button title="Beep" onPress={this.createEvent} />
