@@ -14,10 +14,12 @@ export default class HomeScreen extends React.Component {
         totalYapps: 0
       }
     }
+    
     static navigationOptions = {
         headerTitle: <Header />,
         headerStyle: { marginTop: 50, backgroundColor: theme.colors.yummyPink}
     }
+
     componentWillMount(){
       firebase.database()
               .ref('/dashboard')
