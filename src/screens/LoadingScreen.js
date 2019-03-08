@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
+import theme from '../styles/theme';
+
 
 export default class LoadingScreen extends React.Component {
     render() {

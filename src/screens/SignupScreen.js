@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import Logo from '../images/logo';
 import theme from '../styles/theme';
 
