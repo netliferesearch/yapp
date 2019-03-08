@@ -4,8 +4,6 @@ import { StyleSheet, View, TouchableOpacity, Text, Button, StatusBar } from "rea
 import Header from '../components/Header/header';
 import theme from '../styles/theme';
 import * as firebase from 'firebase';
-//import console = require("console");
-
 
 export default class HomeScreen extends React.Component {
     constructor(props){
