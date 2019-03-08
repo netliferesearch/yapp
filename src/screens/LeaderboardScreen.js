@@ -50,16 +50,18 @@ export default class LeaderboardScreen extends React.Component {
       })
       return (
         <View style={ styles.screenWrapper }>
+        <View style={ styles.contestantWrapper }>
             { 
               sortedList.map(function(sortedList, i) {
                 return (
-                  <View style={ styles.contestantWrapper } key={i}>
-                    <Text style={ theme.h3 }>{ sortedList.numberOfYapps + " " + sortedList.username }</Text>
-                  </View>
+                  
+                    <Text key={i} style={ theme.h3 }>{ sortedList.numberOfYapps + " Yapps! -> " + sortedList.username }</Text>
                   );
                 })
             }
-          <Text style={ theme.h3 }>{ sortedList[0].username } has taken the lead!</Text>
+          </View>
+          <Text style={[ styles.leaderName ]}>{ sortedList[0].username }</Text> 
+          <Text style={[ styles.leaderNote ]}>has taken the lead!</Text>
           <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('Home')}>
             <Text style={ theme.buttonText }>Go to homescreen</Text>
           </TouchableOpacity>
@@ -77,6 +79,18 @@ const styles = StyleSheet.create({
     color: '#F80303'
   },
   contestantWrapper: {
-    flexBasis: 50
+    margin: 20
+  },
+  leaderName: {
+    fontSize: 40,
+    fontFamily: 'NetlifeY',
+    color: theme.colors.yellingRed,
+    marginTop: 20,
+    marginBottom: 5
+  },
+  leaderNote: {
+    fontSize: 25,
+    fontFamily: 'NetlifeY',
+    color: theme.colors.yellingRed
   }
 });
