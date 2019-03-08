@@ -85,9 +85,13 @@ export default class MeetupCreate extends React.Component {
         />
 
         <ButtonGroup
-          onPress={this.updateIndex}
+          onPress={index =>
+            this.setState({
+              event: { ...this.state.event, title: suggestions[index] }
+            })
+          }
           selectedIndex={selectedIndex}
-          buttons={buttons}
+          buttons={suggestions}
           containerStyle={{ height: 100 }}
         />
 
