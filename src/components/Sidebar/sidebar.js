@@ -1,22 +1,18 @@
 import React, { props } from "react";
-import { View, Text, Button, MenuItem, FlatList } from "react-native";
+import { View, Text, Button, MenuItem, FlatList, SafeAreaView } from "react-native";
 import { DrawerItems } from 'react-navigation';
+import Header from '../Header/header';
 import theme from '../../styles/theme';
+import { ScrollView } from "react-native-gesture-handler";
 
 
-export default class Sidebar extends React.Component {
-    render() {
-      return (
-        <View style={styles}>
-            <Text style={ {color: 'white'} }>I am a funky text</Text>
-        
-        </View>
-      );
-    }
-}
+const Sidebar = (props) => (
+    <SafeAreaView style={ {flex: 1} }>
+        <Header sidebar/>
+        <ScrollView style={{backgroundColor: theme.colors.yellingRed, colors: 'white'}}>
+            <DrawerItems {...props}></DrawerItems>
+        </ScrollView>
+    </SafeAreaView>
+);
 
-const styles = { 
-    flex: 1, 
-    backgroundColor: theme.colors.yellingRed, 
-    color: 'white'
-};
+export default Sidebar;
