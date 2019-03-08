@@ -14,13 +14,6 @@ const event = {
   tags: ['cms', 'kommune'],
 };
 
-// Get data from Firebase
-
-// const attendeeInfo = event.attendees.map(attendeeId =>  firebaseHelper.getInfo(attendeeId))
-
-const freeSpaces = attendeeLimit - attendees.length;
-const freeSpacesText = freeSpaces > 0 ? `${freeSpaces} av ${attendeeLimit} plasser ledig` : 'Beklager, fullt';
-
 handleAttendClick = () => {
   alert('Grattis, du er påmeldt');
 };
@@ -58,6 +51,10 @@ export default class MeetupEvent extends React.Component {
       attendees = [],
       attendeeLimit = 0,
     } = event;
+
+    const freeSpaces = attendeeLimit - attendees.length;
+    const freeSpacesText = freeSpaces > 0 ? `${freeSpaces} av ${attendeeLimit} plasser ledig` : 'Beklager, fullt';
+    // const attendeeInfo = event.attendees.map(attendeeId =>  firebaseHelper.getInfo(attendeeId))
 
     return (
       <View style={{ flex: 1, backgroundColor: '#FFFFFF', color: 'black' }}>
