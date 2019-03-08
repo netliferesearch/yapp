@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Picker } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Input, Button } from "react-native-elements";
+import { Input, Button, ButtonGroup } from "react-native-elements";
 import firebase from "../../firebaseConfig";
 import meetupListStyles from "../styles/meetupListStyles";
 
@@ -19,9 +19,9 @@ export default class MeetupCreate extends React.Component {
     this.state = {
       event: {
         id: id || "123",
-        title: "tittel", //
-        attendees: attendees || ["222"],
-        location: location || "oslo", //
+        title: "Hvordan CSS reddet verden. Et retrospektiv", //
+        attendees: attendees || ["278"],
+        location: location || "Bord 12", //
         time: time || {
           //
           start: "11",
@@ -46,6 +46,8 @@ export default class MeetupCreate extends React.Component {
 
   render() {
     const { goBack } = this.props.navigation;
+    const suggestions = ["Hello", "World", "Buttons"];
+
     return (
       <View style={meetupListStyles.wrapper}>
         <Button
@@ -58,8 +60,21 @@ export default class MeetupCreate extends React.Component {
           }}
         />
 
+        <Text style={meetupListStyles.screenTitle} numberOfLines={5}>
+          {this.state.event.location}
+        </Text>
+
+        <Text style={meetupListStyles.screenTitle} numberOfLines={5}>
+          {this.state.event.time.start} - {this.state.event.time.end}
+        </Text>
+
+        <Text style={meetupListStyles.subTitleText} numberOfLines={5}>
+          I WANT TO YAPP ABOUT
+        </Text>
+
         <Input
-          label="Title"
+          label="UX? Sustainability? Game of Thrones? Make it short and sweet."
+          style={meetupListStyles.listItem}
           placeholder="Title"
           leftIcon={{ type: "font-awesome", name: "arrow-left" }}
           onChangeText={title =>
@@ -69,19 +84,13 @@ export default class MeetupCreate extends React.Component {
           }
         />
 
-        <Picker
-          prompt="Attendee limit"
-          selectedValue={this.state.event.attendeeLimit}
-          onValueChange={(itemValue, itemIndex) => {
-            this.setState({
-              event: { ...this.state.event, attendeeLimit: parseInt(itemValue) }
-            });
-            console.log("attendeeLimit", this.state.event.attendeeLimit);
-          }}
-        >
-          <Picker.Item label="3" value={3} />
-          <Picker.Item label="4" value={4} />
-        </Picker>
+        <ButtonGroup
+          onPress={this.updateIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={{ height: 100 }}
+        />
+
         <Input
           placeholder="INPUT WITH ICON"
           leftIcon={{ type: "font-awesome", name: "chevron-left" }}
@@ -93,10 +102,13 @@ export default class MeetupCreate extends React.Component {
         />
         <Text>Create a meetup here!</Text>
         <Button
-          title="Beep"
+          title="CLAIM THIS YAPP"
           onPress={() => {
             this.createEvent;
-            this.props.navigation.navigate({ routeName: "Home" });
+            this.props.navigation.navigate({
+              routeName: "MeetupEvent",
+              params: { event: this.state.event }
+            });
           }}
         />
       </View>
