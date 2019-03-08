@@ -1,30 +1,58 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import AnimateNumber from 'react-native-countup';
+import { StyleSheet, View, TouchableOpacity, Text, Button } from "react-native";
 import Header from '../components/Header/header';
 import theme from '../styles/theme';
+import * as firebase from 'firebase';
+//import console = require("console");
 
 
 export default class HomeScreen extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        totalYapps: 0
+      }
+    }
     static navigationOptions = {
         headerTitle: <Header title="YAPP!" />,
     }
-
+    componentWillMount(){
+      firebase.database()
+              .ref('/dashboard')
+              .on('value', snapshot => {
+                  const dashboard = snapshot.val();
+                  this.setState({ totalYapps: dashboard.countAll})
+              });
+    }
     render() {
+      const totalYapps = this.state.totalYapps;
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.yummyPink, color: '#fff'}}>
-          <Button
-            title="Go to the Leaderboard"
-            onPress={() => this.props.navigation.navigate('Leaderboard')}
-          />
+        <View style={ styles.screenWrapper }>
+          <Text style={ theme.h3 }>Keep Yappin'! </Text>
+          <Text style={ theme.h3 }>We are currently at</Text>
+          <AnimateNumber style={styles.mainNumber} value={ totalYapps } countBy={ 3 }/>
+          <Text style={ theme.h3 }>Yapps!</Text>
+          <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('Leaderboard')}>
+            <Text style={ theme.buttonText }>Go to leaderboard</Text>
+          </TouchableOpacity>
         </View>
       );
     }
   }
-const styles = {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    backgroundColor: '#F3C1C1', 
+const styles = StyleSheet.create({
+  screenWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.yummyPink,
     color: '#F80303'
-}
+  },
+  mainNumber: {
+    color: theme.colors.yellingRed,
+    fontSize: 65,
+    fontFamily: 'NetlifeY',
+    margin: 15
+  }
+});
   

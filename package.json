@@ -11,6 +11,7 @@
     "firebase": "^5.8.5",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-countup": "^0.0.2",
     "react-navigation": "^3.3.2",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
@@ -29,6 +30,8 @@
   },
   "private": true,
   "rnpm": {
-    "assets": ["src/assets/fonts/NetlifeY"]
-   }
+    "assets": [
+      "src/assets/fonts/NetlifeY"
+    ]
+  }
 }
