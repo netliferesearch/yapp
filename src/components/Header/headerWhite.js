@@ -12,11 +12,6 @@ export default class Header extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.setState({
-            title: this.props.title
-        })
-    }
     render() {
       const title = this.state.title;
       return (

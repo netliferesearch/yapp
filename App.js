@@ -2,43 +2,70 @@ import './firebaseConfig';
 //import * as firebase from 'firebase';
 import React from 'react';
 import {
-	SafeAreaView,
-  StatusBar
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  View
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { Font, AppLoading } from 'expo';
 import Store from './Store';
 import theme from './src/styles/theme';
+import { Constants } from 'expo'
 
-import { createStackNavigator, createAppContainer, createBottomTabNavigator, createDrawerNavigator, createSwitchNavigator } from "react-navigation";
+
+import { DrawerItems, SafeAreaView, createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
 
 // Import screens
 import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LeaderboardScreen from './src/screens/LeaderboardScreen';
-
-const RootStack = createStackNavigator(
+import Sidebar from './src/components/Sidebar/sidebar';
+const HomeScreenStack = createStackNavigator(
   {
-    Signup: SignupScreen,
-    Home: HomeScreen,
-    Leaderboard: LeaderboardScreen
+    Home: {
+      screen: HomeScreen,
+    }
   },
   {
-    initialRouteName: "Signup",
-    defaultNavigationOptions: {
-      headerLeft: null,
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0,
-        borderBottomWidth: 0,
-        height: 120,
-        backgroundColor: theme.colors.yummyPink
-       }
-    }
+    navigationOptions: ({ navigation }) => ({
+      initialRouteName: 'HomeScreen',
+      drawerLabel: 'Home',
+    }),
   }
-)
+);
 
-const AppContainer = createAppContainer(RootStack);
+const LeaderboardScreenStack = createStackNavigator(
+  {
+    LeaderboardScreen: {
+      screen: LeaderboardScreen,
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      initialRouteName: 'LeaderboardScreen',
+      drawerLabel: 'Leaderboard',
+    }),
+  }
+);
+
+const AppNavigator = createDrawerNavigator({
+  HomeScreen: {
+    name: 'HomeScreenStack',
+    screen: HomeScreenStack,
+  },
+  LeaderboardScreen: {
+    name: 'LeaderboardScreenStack',
+    screen: LeaderboardScreenStack,
+  },
+}, 
+  {
+  contentComponent: Sidebar
+  }
+);
+
+
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   state = {

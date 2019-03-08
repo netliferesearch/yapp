@@ -11,9 +11,10 @@ export default class LeaderboardScreen extends React.Component {
             contestants: ['Tatsumi', 'Jenny', 'Lars', 'Amir', 'Tore', 'Tommy', 'Jarle', 'Marte', 'Bjarne', 'Kjell-Arnt']
         }
     }
-    
+
     static navigationOptions = {
-        headerTitle: <Header title="LEADERBOARD"></Header>,
+      headerTitle: <Header />,
+      headerStyle: { marginTop: 50, backgroundColor: theme.colors.yummyPink}
     }
 
     render() {
