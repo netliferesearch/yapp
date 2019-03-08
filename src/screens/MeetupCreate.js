@@ -9,19 +9,20 @@ export default class MeetupCreate extends React.Component {
   constructor(props) {
     super(props);
     this.createEvent = this.createEvent.bind(this);
+    const { id, attendees, location, time, creator } = props;
     this.state = {
       event: {
-        id: "123",
+        id: id || "123",
         title: "tittel", //
-        attendees: ["222"],
-        location: "oslo", //
-        time: {
+        attendees: attendees || ["222"],
+        location: location || "oslo", //
+        time: time || {
           //
           start: "11",
           end: "12"
         },
-        creator: "278",
-        attendeeLimit: -1, //
+        creator: creator || "278",
+        attendeeLimit: 3, //
         tags: ["tag"] //
       }
     };
@@ -30,10 +31,6 @@ export default class MeetupCreate extends React.Component {
   async createEvent() {
     const eventData = this.state.event;
     const eventId = await firebase.postEvent(eventData);
-    // const events = await firebase.getAllEvents();
-
-    // this.setState({ events });
-    // console.log("event object", events);
     console.log("event State", this.state.event, eventId);
   }
 
@@ -70,22 +67,23 @@ export default class MeetupCreate extends React.Component {
 
         <Picker
           prompt="Attendee limit"
-          selectedValue={this.state.language}
-          onValueChange={(itemValue, itemIndex) =>
+          selectedValue={this.state.event.attendeeLimit}
+          onValueChange={(itemValue, itemIndex) => {
             this.setState({
-              event: { ...this.state.event, attendeeLimit: itemValue }
-            })
-          }
+              event: { ...this.state.event, attendeeLimit: parseInt(itemValue) }
+            });
+            console.log("attendeeLimit", this.state.event.attendeeLimit);
+          }}
         >
-          <Picker.Item label="3" value="3" />
-          <Picker.Item label="4" value="4" />
+          <Picker.Item label="3" value={3} />
+          <Picker.Item label="4" value={4} />
         </Picker>
         <Input
           placeholder="INPUT WITH ICON"
           leftIcon={{ type: "font-awesome", name: "chevron-left" }}
-          onChangeText={tags =>
+          onChangeText={tag =>
             this.setState({
-              event: { ...this.state.event, tags }
+              event: { ...this.state.event, tags: [...this.state.tags, tag] }
             })
           }
         />
