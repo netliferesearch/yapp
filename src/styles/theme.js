@@ -44,6 +44,16 @@ const theme = {
   p: {
     fontSize: 15,
     fontFamily: 'NetlifeY',
+  },
+  button: {
+    backgroundColor: '#DD1215',
+    padding: 15,
+    margin: 20
+  },
+  buttonText: {
+    fontSize: 16,
+    fontFamily: 'NetlifeY',
+    color: '#fff'
   }
 }
 

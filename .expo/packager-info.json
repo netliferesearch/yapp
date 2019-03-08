@@ -1,0 +1,9 @@
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://zf-qmb.anonymous.yapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.zf-qmb.anonymous.yapp.exp.direct",
+  "ngrokPid": 14933,
+  "devToolsPort": 19002,
+  "packagerPort": 19001,
+  "packagerPid": 14904
+}
