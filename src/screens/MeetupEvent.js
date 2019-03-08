@@ -17,7 +17,6 @@ const event = {
 // Get data from Firebase
 
 // const attendeeInfo = event.attendees.map(attendeeId =>  firebaseHelper.getInfo(attendeeId))
-const { subject, location, time, description, tags, attendees, attendeeLimit } = event;
 
 const freeSpaces = attendeeLimit - attendees.length;
 const freeSpacesText = freeSpaces > 0 ? `${freeSpaces} av ${attendeeLimit} plasser ledig` : 'Beklager, fullt';
@@ -39,10 +38,30 @@ class BoldText extends React.Component {
 }
 
 export default class MeetupEvent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.params = this.props.navigation.state.params;
+  }
+
   render() {
+    console.log(this.params);
+    const {
+      event = {}
+    } = this.params;
+
+    const {
+      subject = '',
+      location = '',
+      time = {},
+      description = {},
+      tags = [],
+      attendees = [],
+      attendeeLimit = 0,
+    } = event;
+
     return (
       <View style={{ flex: 1, backgroundColor: '#FFFFFF', color: 'black' }}>
-        <View style={{ justifyContent: 'left', alignItems: 'left' }}>
+        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
           <Button title="← Go back to the event list" onPress={() => this.props.navigation.navigate('MeetupList')} />
         </View>
 

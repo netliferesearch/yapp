@@ -31,16 +31,19 @@ const meetupListStyles = StyleSheet.create({
     alignItems: 'center',
   },
   titleText: {
+    fontFamily: 'NetlifeY',
     fontWeight: 'bold',
     fontSize: 18,
     color: theme.colors.yellingRed,
   },
   subTitleText: {
+    fontFamily: 'NetlifeY',
     fontWeight: 'normal',
     fontSize: 16,
     color: theme.colors.yellingRed,
   },
   sponsorText: {
+    fontFamily: 'NetlifeY',
     fontWeight: 'normal',
     fontSize: 16,
     color: theme.colors.babyBlue,

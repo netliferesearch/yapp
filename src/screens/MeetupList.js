@@ -14,6 +14,10 @@ const eventsList = [
 
 
 export default class MeetupList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.navigate = this.props.navigation.navigate;
+  }
 
   renderEvent(event) {
     const {
@@ -37,7 +41,7 @@ export default class MeetupList extends React.Component {
 
     return (
       <TouchableHighlight
-        onPress={() => this.props.navigation.navigate('MeetupEvent')}
+        onPress={() => this.navigate("MeetupEvent", { event })}
       >
         <View
           style={meetupListStyles.listItem}

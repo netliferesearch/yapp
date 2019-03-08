@@ -15,7 +15,7 @@ const theme = {
     babyBlue: '#0000FF',
   },
   paddingSmall: {
-    padding: 7
+    padding: 10
   }, 
   paddingMedium: {
     padding: 15
@@ -42,7 +42,7 @@ const theme = {
     paddingBottom: 7
   }, 
   p: {
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: 'NetlifeY',
   }
 }
