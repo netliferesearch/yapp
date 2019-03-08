@@ -34,7 +34,7 @@ export default class HomeScreen extends React.Component {
           <Text style={ theme.h3 }>We are currently at</Text>
           <AnimateNumber style={styles.mainNumber} value={ totalYapps } countBy={ 3 }/>
           <Text style={ theme.h3 }>Yapps!</Text>
-          <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('Leaderboard')}>
+          <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('LeaderboardScreen')}>
             <Text style={ theme.buttonText }>Go to leaderboard</Text>
           </TouchableOpacity>
         </View>
