@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 
 // Import reducers
-import { leaderboardFetched } from './LeaderboardReducer';
+import { card, userSignedUp } from './UserReducer';
 
 const appReducer = combineReducers({
-	leaderboardFetched,
+	card,
+	userSignedUp,
 });
 
 export default rootReducer = (state, action) => {
