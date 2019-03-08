@@ -4,8 +4,6 @@ import { StyleSheet, View, TouchableOpacity, Text, Button, StatusBar } from "rea
 import Header from '../components/Header/header';
 import theme from '../styles/theme';
 import * as firebase from 'firebase';
-//import console = require("console");
-
 
 export default class HomeScreen extends React.Component {
     constructor(props){
@@ -14,10 +12,12 @@ export default class HomeScreen extends React.Component {
         totalYapps: 0
       }
     }
+    
     static navigationOptions = {
         headerTitle: <Header />,
         headerStyle: { marginTop: 50, backgroundColor: theme.colors.yummyPink}
     }
+
     componentWillMount(){
       firebase.database()
               .ref('/dashboard')

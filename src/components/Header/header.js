@@ -8,7 +8,8 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sidebar: false
+            sidebar: false,
+            customTitle: ''
         }
     }
 
@@ -18,7 +19,7 @@ export default class Header extends React.Component {
         })
     }
     render() {
-      const sidebar = this.state.sidebar;
+      const {sidebar, customTitle} = this.state;
       return (
         <React.Fragment>
           {sidebar ? 
@@ -27,7 +28,16 @@ export default class Header extends React.Component {
               </View>
             ) : (
               <View style={styles}>
-                <Logo />
+                {
+                  customTitle === '' ? (
+                    <View>
+                      <Logo />
+                    </View>
+                  ) : (
+                    <Text>{customTitle}</Text>
+                  )
+                }
+                
               </View>
             )} 
           </React.Fragment>
@@ -47,8 +57,7 @@ const styles = {
 const sidebarStyles = {
     flex: 1,
     top: 4,
-    alignItems: 'center', 
-    justifyContent: 'center', 
+    alignItems: 'center',
     backgroundColor: theme.colors.yellingRed, 
     color: '#F80303'
 }
