@@ -17,9 +17,10 @@ export default class MeetupCreate extends React.Component {
       creator
     } = this.props.navigation.getParam("createProps", {});
     this.state = {
+      selectedIndex: -1,
       event: {
         id: id || "123",
-        title: "Hvordan CSS reddet verden. Et retrospektiv", //
+        title: "", //
         attendees: attendees || ["278"],
         location: location || "Bord 12", //
         time: time || {
@@ -46,7 +47,7 @@ export default class MeetupCreate extends React.Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const suggestions = ["Hello", "World", "Buttons"];
+    const suggestions = ["Mingling", "World", "Buttons"];
 
     return (
       <View style={meetupListStyles.wrapper}>
@@ -75,6 +76,7 @@ export default class MeetupCreate extends React.Component {
         <Input
           label="UX? Sustainability? Game of Thrones? Make it short and sweet."
           style={meetupListStyles.listItem}
+          value={this.state.event.title}
           placeholder="Title"
           leftIcon={{ type: "font-awesome", name: "arrow-left" }}
           onChangeText={title =>
@@ -87,23 +89,15 @@ export default class MeetupCreate extends React.Component {
         <ButtonGroup
           onPress={index =>
             this.setState({
+              selectedIndex: index,
               event: { ...this.state.event, title: suggestions[index] }
             })
           }
-          selectedIndex={selectedIndex}
+          selectedIndex={this.state.selectedIndex}
           buttons={suggestions}
           containerStyle={{ height: 100 }}
         />
 
-        <Input
-          placeholder="INPUT WITH ICON"
-          leftIcon={{ type: "font-awesome", name: "chevron-left" }}
-          onChangeText={tag =>
-            this.setState({
-              event: { ...this.state.event, tags: [...this.state.tags, tag] }
-            })
-          }
-        />
         <Text>Create a meetup here!</Text>
         <Button
           title="CLAIM THIS YAPP"
