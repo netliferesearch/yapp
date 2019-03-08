@@ -1,4 +1,4 @@
-import './firebaseConfig';
+import firebase from './firebaseConfig';
 //import * as firebase from 'firebase';
 import React from 'react';
 import {
@@ -13,7 +13,7 @@ import Store from './Store';
 import theme from './src/styles/theme';
 import { Constants } from 'expo'
 
-
+const user = firebase.auth().currentUser;
 import { DrawerItems, SafeAreaView, createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
 
 // Import screens
@@ -64,7 +64,25 @@ const ProfileScreenStack = createStackNavigator(
   }
 );
 
+const SignupScreenStack = createStackNavigator(
+  {
+    SignupScreen: {
+      screen: SignupScreen,
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      initialRouteName: 'SignupScreen',
+      drawerLabel: 'Signup',
+    }),
+  }
+);
+
 const AppNavigator = createDrawerNavigator({
+  SignupScreen: {
+    name: 'SignupScreenStack',
+    screen: SignupScreenStack,
+  },
   HomeScreen: {
     name: 'HomeScreenStack',
     screen: HomeScreenStack,

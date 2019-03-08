@@ -66,7 +66,7 @@ class SignupScreen extends React.Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         navigation.navigate('Home');
       }
@@ -75,7 +75,7 @@ class SignupScreen extends React.Component {
 
   componentDidUpdate() {
     const { navigation } = this.props;
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged((user) => {
       if(user) {
         navigation.navigate('Home');
       }
