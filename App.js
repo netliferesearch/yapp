@@ -21,7 +21,9 @@ import HomeScreen from "./src/screens/HomeScreen";
 import LeaderboardScreen from "./src/screens/LeaderboardScreen";
 import MeetupListScreen from "./src/screens/MeetupList";
 import MeetupEventScreen from "./src/screens/MeetupEvent";
+
 import MeetupCreateScreen from "./src/screens/MeetupCreate";
+import MeetupScheduleScreen from "./src/screens/MeetupSchedule";
 
 import Sidebar from "./src/components/Sidebar/sidebar";
 
@@ -77,6 +79,9 @@ const LeaderboardScreenStack = createStackNavigator(
 
 const MeetupListStack = createStackNavigator(
   {
+    Home: {
+      screen: HomeScreen
+    },
     MeetupList: {
       screen: MeetupListScreen
     },
@@ -85,6 +90,9 @@ const MeetupListStack = createStackNavigator(
     },
     MeetupCreate: {
       screen: MeetupCreateScreen
+    },
+    MeetupSchedule: {
+      screen: MeetupScheduleScreen
     }
   },
   {
@@ -99,14 +107,6 @@ const AppNavigator = createDrawerNavigator(
   {
     HomeScreen: {
       name: "HomeScreenStack",
-      screen: MeetupListStack
-    },
-    LeaderboardScreen: {
-      name: "LeaderboardScreenStack",
-      screen: LeaderboardScreenStack
-    },
-    MeetupListScreen: {
-      name: "MeetupListStack",
       screen: MeetupListStack
     }
   },
