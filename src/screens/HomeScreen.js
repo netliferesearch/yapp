@@ -4,8 +4,6 @@ import { StyleSheet, View, TouchableOpacity, Text, Button, StatusBar } from "rea
 import Header from '../components/Header/header';
 import theme from '../styles/theme';
 import * as firebase from 'firebase';
-//import console = require("console");
-
 
 export default class HomeScreen extends React.Component {
     constructor(props){
@@ -36,9 +34,14 @@ export default class HomeScreen extends React.Component {
           <Text style={ theme.h3 }>We are currently at</Text>
           <AnimateNumber style={styles.mainNumber} value={ totalYapps } countBy={ 3 }/>
           <Text style={ theme.h3 }>Yapps!</Text>
-          <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('LeaderboardScreen')}>
-            <Text style={ theme.buttonText }>Go to leaderboard</Text>
-          </TouchableOpacity>
+          <View style={ styles.rowContainer }>
+            <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('LeaderboardScreen')}>
+              <Text style={ theme.buttonText }>Go to leaderboard</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('ProfileScreen')}>
+              <Text style={ theme.buttonText }>See your profile</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       );
     }
@@ -50,6 +53,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: theme.colors.yummyPink,
     color: '#F80303'
+  },
+  rowContainer: {
+    flexDirection: 'row'
   },
   mainNumber: {
     color: theme.colors.yellingRed,
