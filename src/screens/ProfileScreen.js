@@ -12,7 +12,8 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       username: "",
-      totalYapps: 0
+      totalYapps: 0,
+      yapps: []
     }
   }
   static navigationOptions = {
@@ -23,21 +24,29 @@ export default class HomeScreen extends React.Component {
     firebase.database()
             .ref('/users/e000001')
             .on('value', snapshot => {
-                const dashboard = snapshot.val();
+                const user = snapshot.val();
                 this.setState(
-                { 
-                    totalYapps: dashboard.count,
-                    username: dashboard.username 
-                });
+                    {
+                        totalYapps: user.count,
+                        username: user.username,
+                        yapps: user.yapps
+                    });
             });
   }
   render() {
     const totalYapps = this.state.totalYapps;
     const username = this.state.username;
+    const yapps = Object.values( this.state.yapps || {} );
+
     return (
       <View style={ styles.screenWrapper }>
-        <Text style={ theme.h3 }>Keep Yappin' { username }!</Text>
-        <Text style={ theme.h3 }>You have { totalYapps } Yapps!</Text>
+        <Text style={ theme.h3 }>Keep Yappin', { username ? username : "anonymous" }!</Text>
+        <Text style={ theme.h3 }>
+            You have { totalYapps ? totalYapps : "0" } Yapps!
+        </Text>
+            { /*yapps.map((yapp) => {
+                return <Text style={ theme.p }>Yapp stasjon: { yapp.station }</Text>;
+            })*/ }
         <TouchableOpacity style={ theme.button } onPress={() => this.props.navigation.navigate('HomeScreen')}>
           <Text style={ theme.buttonText }>Go back to homescreen</Text>
         </TouchableOpacity>
