@@ -27,7 +27,7 @@ export default class MeetupCreate extends React.Component {
           start: "11",
           end: "12"
         },
-        creator: creator || "278",
+        creator: creator || { id: "278", name: "The Silver Surfer" },
         attendeeLimit: 3, //
         tags: ["tag"] //
       }
