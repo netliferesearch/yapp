@@ -1,6 +1,6 @@
 import React from "react";
 import AnimateNumber from 'react-native-countup';
-import { StyleSheet, View, TouchableOpacity, Text, Button } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Button, StatusBar } from "react-native";
 import Header from '../components/Header/header';
 import theme from '../styles/theme';
 import * as firebase from 'firebase';
@@ -15,7 +15,8 @@ export default class HomeScreen extends React.Component {
       }
     }
     static navigationOptions = {
-        headerTitle: <Header title="YAPP!" />,
+        headerTitle: <Header />,
+        headerStyle: { marginTop: 50, backgroundColor: theme.colors.yummyPink}
     }
     componentWillMount(){
       firebase.database()

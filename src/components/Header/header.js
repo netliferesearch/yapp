@@ -8,29 +8,47 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: ''
+            sidebar: false
         }
     }
 
     componentDidMount() {
         this.setState({
-            title: this.props.title
+            sidebar: this.props.sidebar
         })
     }
     render() {
-      const title = this.state.title;
+      const sidebar = this.state.sidebar;
       return (
-        <View style={styles}>
-          <Logo></Logo>
-        </View>
+        <React.Fragment>
+          {sidebar ? 
+            ( <View style={sidebarStyles}>
+                <Logo />
+              </View>
+            ) : (
+              <View style={styles}>
+                <Logo />
+              </View>
+            )} 
+          </React.Fragment>
       );
     }
-  }
+}
+
 const styles = {
-    flex: 1, 
+    flex: 1,
+    top: 4,
     alignItems: 'center', 
     justifyContent: 'center', 
     backgroundColor: theme.colors.yummyPink, 
     color: '#F80303'
 }
-  
+
+const sidebarStyles = {
+    flex: 1,
+    top: 4,
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    backgroundColor: theme.colors.yellingRed, 
+    color: '#F80303'
+}

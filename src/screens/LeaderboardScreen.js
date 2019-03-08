@@ -37,9 +37,10 @@ export default class LeaderboardScreen extends React.Component {
                         ]
         }
     }
-    
+
     static navigationOptions = {
-        headerTitle: <Header title="LEADERBOARD"></Header>,
+      headerTitle: <Header />,
+      headerStyle: { marginTop: 50, backgroundColor: theme.colors.yummyPink}
     }
 
     render() {
