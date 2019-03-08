@@ -23,7 +23,7 @@ export default class Header extends React.Component {
         <React.Fragment>
           {sidebar ? 
             ( <View style={sidebarStyles}>
-                <Logo />
+                <Logo sidebar/>
               </View>
             ) : (
               <View style={styles}>
