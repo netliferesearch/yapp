@@ -65,19 +65,19 @@ const ProfileScreenStack = createStackNavigator(
 );
 
 const AppNavigator = createDrawerNavigator({
-  HomeScreen: {
-    name: 'HomeScreenStack',
-    screen: HomeScreenStack,
-  },
-  LeaderboardScreen: {
-    name: 'LeaderboardScreenStack',
-    screen: LeaderboardScreenStack,
-  },
-  ProfileScreen: {
-    name: 'ProfileScreenStack',
-    screen: ProfileScreenStack,
-  },
-}, 
+    HomeScreen: {
+      name: 'HomeScreenStack',
+      screen: HomeScreenStack,
+    },
+    LeaderboardScreen: {
+      name: 'LeaderboardScreenStack',
+      screen: LeaderboardScreenStack,
+    },
+    ProfileScreen: {
+      name: 'ProfileScreenStack',
+      screen: ProfileScreenStack,
+    },
+  }, 
   {
   contentComponent: Sidebar
   }
