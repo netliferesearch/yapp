@@ -29,7 +29,7 @@ export default class MeetupList extends React.Component {
     const {
       id = '',
       title = '',
-      creator = '',
+      creator = {},
       attendees = [],
       time = {},
       location = '',
@@ -41,9 +41,16 @@ export default class MeetupList extends React.Component {
       end = ''
     } = time;
 
+    const {
+      id: creatorId = '',
+      name: creatorName = ''
+    } = creator;
+
+    const otherAttendees = attendees.length - 1;
+
     const othersText = attendees.length === 1 ? ' other' : ' others';
 
-    const attendeesText = `${creator.toUpperCase()} ${attendees.length ? ('and ' + attendees.length + othersText) : ''}`;
+    const attendeesText = `${creatorName.toUpperCase()} ${otherAttendees > 0 ? ('and ' + otherAttendees + othersText) : ''}`;
 
     return (
       <TouchableHighlight

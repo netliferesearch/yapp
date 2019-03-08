@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
+import meetupEventStyles from "../styles/meetupEventStyles";
 
 const event = {
   id: '1',
@@ -43,7 +44,7 @@ export default class MeetupEvent extends React.Component {
     } = this.params;
 
     const {
-      subject = '',
+      title = '',
       location = '',
       time = {},
       description = {},
@@ -63,7 +64,7 @@ export default class MeetupEvent extends React.Component {
         </View>
 
         <View>
-          <H1>{subject}</H1>
+          <Text style={meetupEventStyles.titleText}>{title}</Text>
 
           <Text style={{ fontSize: 20 }}>
             Onsdag, {time.start} - {time.end}

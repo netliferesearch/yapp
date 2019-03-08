@@ -79,7 +79,13 @@ const MeetupListStack = createStackNavigator(
   {
     MeetupList: {
       screen: MeetupListScreen,
-    }
+    },
+    MeetupEvent: {
+      screen: MeetupEventScreen
+    },
+    MeetupCreate: {
+      screen: MeetupCreateScreen
+    },
   },
   {
     navigationOptions: ({ navigation }) => ({
