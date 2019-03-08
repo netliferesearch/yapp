@@ -20,6 +20,7 @@ import { DrawerItems, SafeAreaView, createStackNavigator, createAppContainer, cr
 import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LeaderboardScreen from './src/screens/LeaderboardScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 import Sidebar from './src/components/Sidebar/sidebar';
 const HomeScreenStack = createStackNavigator(
   {
@@ -49,6 +50,20 @@ const LeaderboardScreenStack = createStackNavigator(
   }
 );
 
+const ProfileScreenStack = createStackNavigator(
+  {
+    ProfileScreen: {
+      screen: ProfileScreen,
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      initialRouteName: 'ProfileScreen',
+      drawerLabel: 'Profile',
+    }),
+  }
+);
+
 const AppNavigator = createDrawerNavigator({
   HomeScreen: {
     name: 'HomeScreenStack',
@@ -57,6 +72,10 @@ const AppNavigator = createDrawerNavigator({
   LeaderboardScreen: {
     name: 'LeaderboardScreenStack',
     screen: LeaderboardScreenStack,
+  },
+  ProfileScreen: {
+    name: 'ProfileScreenStack',
+    screen: ProfileScreenStack,
   },
 }, 
   {
