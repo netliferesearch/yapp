@@ -1,139 +1,99 @@
-import firebase from './firebaseConfig';
-//import * as firebase from 'firebase';
+/**
+ * Init application and routing for logged out and logged in users.
+ */
 import React from 'react';
-import {
-  StatusBar,
-  StyleSheet,
-  ScrollView,
-  View
-} from 'react-native';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { Font, AppLoading } from 'expo';
+import { Font } from 'expo';
+
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createAppContainer,
+  createDrawerNavigator,
+} from 'react-navigation';
+
 import Store from './Store';
-import theme from './src/styles/theme';
-import { Constants } from 'expo'
 
-const user = firebase.auth().currentUser;
-import { DrawerItems, SafeAreaView, createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
-
-// Import screens
+import LoadingScreen from './src/screens/LoadingScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LeaderboardScreen from './src/screens/LeaderboardScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import Sidebar from './src/components/Sidebar/sidebar';
-const HomeScreenStack = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-    }
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
+
+import NetlifeYFont from './assets/fonts/Netlife_Y-Bold.ttf';
+
+const LoggedOut = createStackNavigator({
+  Loading: LoadingScreen,
+  Signup: SignupScreen,
+});
+
+const LoggedIn = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: () => ({
       initialRouteName: 'HomeScreen',
       drawerLabel: 'Home',
     }),
-  }
-);
-
-const LeaderboardScreenStack = createStackNavigator(
-  {
-    LeaderboardScreen: {
-      screen: LeaderboardScreen,
-    }
   },
-  {
-    navigationOptions: ({ navigation }) => ({
+  LeaderboardScreen: {
+    screen: LeaderboardScreen,
+    navigationOptions: () => ({
       initialRouteName: 'LeaderboardScreen',
       drawerLabel: 'Leaderboard',
     }),
-  }
-);
-
-const ProfileScreenStack = createStackNavigator(
-  {
-    ProfileScreen: {
-      screen: ProfileScreen,
-    }
   },
-  {
-    navigationOptions: ({ navigation }) => ({
+  ProfileScreen: {
+    screen: ProfileScreen,
+    navigationOptions: () => ({
       initialRouteName: 'ProfileScreen',
       drawerLabel: 'Profile',
     }),
-  }
+  },
+});
+
+const AppNavigator = createSwitchNavigator(
+  {
+    LoggedOut,
+    LoggedIn,
+  },
+  {
+    initialRouteName: 'LoggedOut',
+  },
 );
 
-const SignupScreenStack = createStackNavigator(
+const DrawerNavigator = createDrawerNavigator(
   {
-    SignupScreen: {
-      screen: SignupScreen,
-    }
+    LoggedIn,
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      initialRouteName: 'SignupScreen',
-      drawerLabel: 'Signup',
-    }),
-  }
+    contentComponent: Sidebar,
+  },
 );
 
-const AppNavigator = createDrawerNavigator({
-  SignupScreen: {
-    name: 'SignupScreenStack',
-    screen: SignupScreenStack,
-  },
-  HomeScreen: {
-    name: 'HomeScreenStack',
-    screen: HomeScreenStack,
-  },
-  LeaderboardScreen: {
-    name: 'LeaderboardScreenStack',
-    screen: LeaderboardScreenStack,
-  },
-  ProfileScreen: {
-    name: 'ProfileScreenStack',
-    screen: ProfileScreenStack,
-  },
-}, 
-  {
-  contentComponent: Sidebar
-  }
-);
-
-
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator, DrawerNavigator);
 
 export default class App extends React.Component {
-  state = {
-    isReady: false,
-    fontLoaded: false,
-  };
-
-  _loadFontsAsync = async () => {
-    await Font.loadAsync({'NetlifeY': require('./assets/fonts/Netlife_Y-Bold.ttf')});
-    this.setState({fontLoaded: true, isReady: true});
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-  componentWillMount() {
-    this._loadFontsAsync();
-  }
-	render() {
-    if( this.state.fontLoaded ){
-      return (
-        <Provider store={Store}>
-          <StatusBar barStyle="dark-content"/>
-          <AppContainer />
-			  </Provider>
-      );
-    }
-    else{
-      return (
-        <AppLoading
-          startAsync={this._loadAssetAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />);
-    }
 
+  componentDidMount() {
+    this.loadFontsAsync();
+  }
+
+  async loadFontsAsync() {
+    await Font.loadAsync({ NetlifeY: NetlifeYFont });
+  }
+
+  render() {
+    return (
+      <Provider store={Store}>
+        <StatusBar barStyle="dark-content" />
+        <AppContainer />
+      </Provider>
+    );
   }
 }

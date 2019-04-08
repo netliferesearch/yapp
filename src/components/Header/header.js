@@ -1,63 +1,56 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
+import React from 'react';
+import { View, Text } from 'react-native';
+import propTypes from 'prop-types';
 import Logo from '../../images/logo';
-import theme from '../../styles/theme';
-
+import styles from '../../styles/HeaderStyles';
 
 export default class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sidebar: false,
-            customTitle: ''
-        }
-    }
+  constructor(props) {
+    super(props);
 
-    componentDidMount() {
-        this.setState({
-            sidebar: this.props.sidebar
-        })
-    }
-    render() {
-      const {sidebar, customTitle} = this.state;
-      return (
-        <React.Fragment>
-          {sidebar ? 
-            ( <View style={sidebarStyles}>
-                <Logo sidebar/>
+    this.state = {
+      showSidebar: false,
+      customTitle: '',
+    };
+  }
+
+  componentDidMount() {
+    const { sidebar } = this.props;
+
+    this.setState({
+      showSidebar: sidebar,
+    });
+  }
+
+  render() {
+    const { showSidebar, customTitle } = this.state;
+
+    return (
+      <React.Fragment>
+        {showSidebar ? (
+          <View style={styles.sidebar}>
+            <Logo sidebar={showSidebar} />
+          </View>
+        ) : (
+          <View style={styles.default}>
+            {customTitle === '' ? (
+              <View>
+                <Logo />
               </View>
             ) : (
-              <View style={styles}>
-                {
-                  customTitle === '' ? (
-                    <View>
-                      <Logo />
-                    </View>
-                  ) : (
-                    <Text>{customTitle}</Text>
-                  )
-                }
-                
-              </View>
-            )} 
-          </React.Fragment>
-      );
-    }
+              <Text>{customTitle}</Text>
+            )}
+          </View>
+        )}
+      </React.Fragment>
+    );
+  }
 }
 
-const styles = {
-    flex: 1,
-    top: 4,
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    backgroundColor: theme.colors.yummyPink, 
-    color: '#F80303'
-}
+Header.defaultProps = {
+  sidebar: false,
+};
 
-const sidebarStyles = {
-    flex: 1,
-    top: 4,
-    alignItems: 'center',
-    backgroundColor: theme.colors.yellingRed, 
-    color: '#F80303'
-}
+Header.propTypes = {
+  sidebar: propTypes.bool,
+};

@@ -1,27 +1,32 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
+import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import propTypes from 'prop-types';
+
+import firebase from '../../firebaseConfig';
+
+import Logo from '../images/logo';
+import styles from '../styles/LoadingScreenStyles';
 import theme from '../styles/theme';
 
-
-export default class LoadingScreen extends React.Component {
-    render() {
-      return (
-        <View style={styles}>
-        {/* <HeaderComponent /> */}
-          <Text>Tatsumi has taken the lead!</Text>
-          <Button
-            title="Go to the Homescreen"
-            onPress={() => this.props.navigation.navigate('Home')}
-          />
-        </View>
-      );
-    }
+export default class Loading extends React.Component {
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.props.navigation.navigate(user ? 'LoggedIn' : 'SignUp');
+    });
   }
 
-const styles = { 
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    backgroundColor: '#F3C1C1', 
-    color: '#F80303'
+  render() {
+    return (
+      <View style={styles.screenWrapper}>
+        <Logo />
+        <View style={styles.spinnerWrapper}>
+          <ActivityIndicator size="large" color={theme.colors.yellingRed} />
+        </View>
+      </View>
+    );
+  }
+}
+
+Loading.propTypes = {
+  navigation: propTypes.object.isRequired,
 };

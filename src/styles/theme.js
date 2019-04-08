@@ -1,59 +1,16 @@
-/* 
-
-Contains: 
--Colors (yummyPink, yellingRed, yetiWhite)
--Padding (paddingSmall,-Medium,-Large)
--Headers (h1,h2,h3)
-
-*/
-
 const theme = {
   colors: {
     yummyPink: '#FCF0EE',
     yellingRed: '#DD1215',
     yetiWhite: '#FFFFFF',
   },
-  paddingSmall: {
-    padding: 7
-  }, 
-  paddingMedium: {
-    padding: 15
+  margins: {
+    xs: 5,
+    sm: 10,
+    md: 15,
+    lg: 30,
+    xl: 60,
   },
-  paddingLarge: {
-    padding: 20
-  },
-  h1: {
-    fontSize: 55,
-    fontFamily: 'NetlifeY',
-    paddingTop: 20,
-    paddingBottom: 20
-  },
-  h2: {
-    fontSize: 35,
-    fontFamily: 'NetlifeY',
-    paddingTop: 15,
-    paddingBottom: 15
-  },
-  h3: {
-    fontSize: 25,
-    fontFamily: 'NetlifeY',
-    paddingTop: 7,
-    paddingBottom: 7
-  }, 
-  p: {
-    fontSize: 16,
-    fontFamily: 'NetlifeY',
-  },
-  button: {
-    backgroundColor: '#DD1215',
-    padding: 15,
-    margin: 20
-  },
-  buttonText: {
-    fontSize: 16,
-    fontFamily: 'NetlifeY',
-    color: '#fff'
-  }
-}
+};
 
 export default theme;

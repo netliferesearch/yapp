@@ -1,5 +1,6 @@
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import propTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,45 +9,12 @@ import firebase from '../../firebaseConfig';
 import { fetchUnregisteredCardById, signupUser } from '../actions/SignupUser';
 
 import Logo from '../images/logo';
-import theme from '../styles/theme';
-
-const styles = StyleSheet.create({
-  screenWrapper: {
-    padding: 20,
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: theme.colors.yummyPink,
-  },
-  // TODO: remove input styles and create separate input component.
-  input: {
-    width: 200,
-    height: 40,
-    padding: 5,
-    borderBottomColor: theme.colors.yellingRed,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 2,
-    borderLeftWidth: 0,
-    backgroundColor: theme.colors.yetiWhite,
-  },
-  logoWrapper: {
-    textAlign: 'center',
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: 'red',
-    padding: 10
-  },
-  buttonText: {
-    color: theme.colors.yetiWhite,
-  }
-});
+import styles from '../styles/SignupScreenStyles';
 
 class SignupScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       cardId: '',
       nickname: '',
       email: '',
@@ -56,18 +24,18 @@ class SignupScreen extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if(props.card === false && state.signupPage === 1) {
+    if (props.card === false && state.signupPage === 1) {
       return {
-        signupPage: 2
-      }
+        signupPage: 2,
+      };
     }
     return null;
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
         navigation.navigate('Home');
       }
     });
@@ -75,109 +43,96 @@ class SignupScreen extends React.Component {
 
   componentDidUpdate() {
     const { navigation } = this.props;
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
         navigation.navigate('Home');
       }
     });
   }
 
-  onPressCardId = () => {
+  onPressCardId() {
     const { cardId } = this.state;
 
-    if(cardId !== '') {
+    if (cardId !== '') {
       this.props.fetchUnregisteredCardById(cardId);
     }
   }
 
-  onPressAccount = () => {
+  onPressAccount() {
     const { cardId, nickname, email, password } = this.state;
 
-    if(nickname !== '' && email !== '' && password !== '') {
+    if (nickname !== '' && email !== '' && password !== '') {
       this.props.signupUser(cardId, nickname, email, password);
     }
   }
-  
+
   render() {
     const { cardId, nickname, email, password, signupPage } = this.state;
 
     return (
       <View style={styles.screenWrapper}>
         <View style={styles.logoWrapper}>
-          <Logo/>
+          <Logo />
         </View>
         <Text>What's in it for me text.</Text>
-        {
-          signupPage === 2 ? (
-            <View>
-              <Text>Fill in personal info and create account.</Text>
-              <Text>Nickname</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(nickname) => this.setState({nickname})}
-                value={this.state.nickname}
-              />
-              <Text>Email</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(email) => this.setState({email})}
-                value={this.state.email}
-              />
-              <Text>Password</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(password) => this.setState({password})}
-                value={this.state.password}
-              />
-              {
-                nickname !== '' && email !== '' && password !== '' && (
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={this.onPressAccount}
-                  >
-                    <Text style={styles.buttonText}>Create account</Text>
-                  </TouchableOpacity>
-                )
-              }
-            </View>
-          ) : (
-            <View>
-            <Text>Input id located on your Y-badge.</Text>
+        {signupPage === 2 ? (
+          <View>
+            <Text>Fill in personal info and create account.</Text>
+            <Text>Nickname</Text>
+            <TextInput style={styles.input} onChangeText={nick => this.setState({ nickname: nick })} value={nickname} />
+            <Text>Email</Text>
+            <TextInput style={styles.input} onChangeText={mail => this.setState({ email: mail })} value={email} />
+            <Text>Password</Text>
             <TextInput
               style={styles.input}
-              onChangeText={(cardId) => this.setState({cardId})}
-              value={this.state.cardId}
+              onChangeText={pass => this.setState({ password: pass })}
+              value={this.state.password}
             />
-            {
-              cardId !== '' && (
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={this.onPressCardId}
-                >
-                  <Text style={styles.buttonText}>Submit ID</Text>
-                </TouchableOpacity>
-              )
-            }
+            {nickname !== '' && email !== '' && password !== '' && (
+              <TouchableOpacity style={styles.button} onPress={this.onPressAccount}>
+                <Text style={styles.buttonText}>Create account</Text>
+              </TouchableOpacity>
+            )}
           </View>
-          )
-        }
+        ) : (
+          <View>
+            <Text>Input id located on your Y-badge.</Text>
+            <TextInput style={styles.input} onChangeText={id => this.setState({ cardId: id })} value={cardId} />
+            {cardId !== '' && (
+              <TouchableOpacity style={styles.button} onPress={this.onPressCardId}>
+                <Text style={styles.buttonText}>Submit ID</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
       </View>
     );
   }
 }
-const mapStateToProps = ({ card, userSignedUp }) => {
-	return {
-    card: card.id,
-    userSignedUp: userSignedUp.user,
-	};
-}
+const mapStateToProps = ({ card, userSignedUp }) => ({
+  card: card.id,
+  userSignedUp: userSignedUp.user,
+});
 
 // Make actions accessable from props
-const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators({
-    fetchUnregisteredCardById,
-    signupUser,
-  }, dispatch);
-}
+// eslint-disable-next-line arrow-body-style
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchUnregisteredCardById,
+      signupUser,
+    },
+    dispatch,
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignupScreen);
+
+SignupScreen.propTypes = {
+  navigation: propTypes.object.isRequired,
+  fetchUnregisteredCardById: propTypes.func.isRequired,
+  signupUser: propTypes.func.isRequired,
+};
