@@ -1,3 +1,16 @@
+/**
+ * Signup using our test badges:
+ * Firebase uid (User session is a uid when logged in with email and password.)
+ * and cardId will always be linked in firebase database after sigup.
+ *
+ * Create new user?
+ * Make sure that either cardId a44e81e or d80d673 is in firebase node unregisteredCards.
+ * If not, it might be activated by a user.
+ * Users uid and email can be found at Firebase Authentication section.
+ * Copy UID and search for it in the users node in firebase users database.
+ * Signup will fetch unregistered cards for cardId. If found then state signupPage will be 2
+ * and only then a user can be linked to that cardId.
+ */
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import propTypes from 'prop-types';
@@ -21,6 +34,8 @@ class SignupScreen extends React.Component {
       password: '',
       signupPage: 1,
     };
+    this.onPressCardId = this.onPressCardId.bind(this);
+    this.onPressAccount = this.onPressAccount.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -30,15 +45,6 @@ class SignupScreen extends React.Component {
       };
     }
     return null;
-  }
-
-  componentDidMount() {
-    const { navigation } = this.props;
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('Home');
-      }
-    });
   }
 
   componentDidUpdate() {

@@ -14,16 +14,17 @@ export default class Loading extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
-
-  render() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.props.navigation.navigate('LoggedIn');
+      if (user !== null) {
+        this.props.navigation.navigate('Home');
       } else {
         this.props.navigation.navigate('Signup');
       }
     });
+  }
+
+  render() {
     return (
       <View style={styles.screenWrapper}>
         <Logo />

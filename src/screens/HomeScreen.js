@@ -18,6 +18,8 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
+    const { navigation } = this.props;
+
     firebase
       .database()
       .ref('/dashboard')
@@ -25,12 +27,22 @@ export default class HomeScreen extends React.Component {
         const dashboard = snapshot.val();
         this.setState({ totalYapps: dashboard.countAll });
       });
+
+    const user = firebase.auth().currentUser;
+
+    if (user === null) {
+      navigation.navigate('Signup');
+    }
   }
 
   logout() {
-    firebase.auth.signOut().then(() => {
-      this.props.navigation.navigate('SignupScreen');
-    });
+    const { navigation } = this.props;
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate('Signup');
+      });
   }
 
   render() {
