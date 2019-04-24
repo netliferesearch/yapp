@@ -9,13 +9,21 @@ import styles from '../styles/LoadingScreenStyles';
 import theme from '../styles/theme';
 
 export default class Loading extends React.Component {
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? 'LoggedIn' : 'SignUp');
-    });
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
+  componentDidMount() {}
+
   render() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate('LoggedIn');
+      } else {
+        this.props.navigation.navigate('Signup');
+      }
+    });
     return (
       <View style={styles.screenWrapper}>
         <Logo />

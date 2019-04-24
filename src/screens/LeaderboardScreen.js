@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import propTypes from 'prop-types';
 
 import theme from '../styles/theme';
-import Header from '../components/Header/Header';
+import Header from '../components/Header';
 
 const styles = StyleSheet.create({
   screenWrapper: {

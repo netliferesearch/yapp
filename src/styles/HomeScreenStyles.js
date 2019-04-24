@@ -2,14 +2,11 @@ import { StyleSheet } from 'react-native';
 import theme from './theme';
 
 const styles = StyleSheet.create({
-  headerStyle: {
-    marginTop: 50,
-    backgroundColor: theme.colors.yummyPink,
-  },
   screenWrapper: {
     flex: 1,
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: theme.colors.yummyPink,
     color: '#F80303',
   },

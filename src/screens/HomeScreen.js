@@ -3,7 +3,8 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import propTypes from 'prop-types';
 import firebase from '../../firebaseConfig';
 
-import Header from '../components/Header/Header';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 import theme from '../styles/theme';
 import styles from '../styles/HomeScreenStyles';
@@ -26,6 +27,12 @@ export default class HomeScreen extends React.Component {
       });
   }
 
+  logout() {
+    firebase.auth.signOut().then(() => {
+      this.props.navigation.navigate('SignupScreen');
+    });
+  }
+
   render() {
     const { totalYapps } = this.state;
     const { navigation } = this.props;
@@ -35,10 +42,12 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.screenWrapper}>
         <Header />
-        <Text style={theme.h3}>Keep Yappin'!{user !== null && user.uid}</Text>
-        <Text style={theme.h3}>We are currently at</Text>
-        <Text style={styles.mainNumber}>{totalYapps}</Text>
-        <Text style={theme.h3}>Yapps!</Text>
+        <View>
+          <Text style={theme.h3}>Keep Yappin'!{user !== null && user.uid}</Text>
+          <Text style={theme.h3}>We are currently at</Text>
+          <Text style={styles.mainNumber}>{totalYapps}</Text>
+          <Text style={theme.h3}>Yapps!</Text>
+        </View>
         <View style={styles.rowContainer}>
           <TouchableOpacity style={theme.button} onPress={() => navigation.navigate('LeaderboardScreen')}>
             <Text style={theme.buttonText}>Go to leaderboard</Text>
@@ -46,7 +55,11 @@ export default class HomeScreen extends React.Component {
           <TouchableOpacity style={theme.button} onPress={() => navigation.navigate('ProfileScreen')}>
             <Text style={theme.buttonText}>See your profile</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={theme.button} onPress={() => this.logout(user)}>
+            <Text style={theme.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
+        <Footer />
       </View>
     );
   }

@@ -6,12 +6,7 @@ import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { Font } from 'expo';
 
-import {
-  createStackNavigator,
-  createSwitchNavigator,
-  createAppContainer,
-  createDrawerNavigator,
-} from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import Store from './Store';
 
@@ -20,7 +15,6 @@ import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import LeaderboardScreen from './src/screens/LeaderboardScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import Sidebar from './src/components/Sidebar/sidebar';
 
 import NetlifeYFont from './assets/fonts/Netlife_Y-Bold.ttf';
 
@@ -63,16 +57,7 @@ const AppNavigator = createSwitchNavigator(
   },
 );
 
-const DrawerNavigator = createDrawerNavigator(
-  {
-    LoggedIn,
-  },
-  {
-    contentComponent: Sidebar,
-  },
-);
-
-const AppContainer = createAppContainer(AppNavigator, DrawerNavigator);
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   constructor(props) {
