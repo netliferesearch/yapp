@@ -2,50 +2,104 @@
  * Init application and routing for logged out and logged in users.
  */
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { Font } from 'expo';
 
-import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createAppContainer,
+  createBottomTabNavigator,
+} from 'react-navigation';
 
 import Store from './Store';
 
 import LoadingScreen from './src/screens/LoadingScreen';
 import SignupScreen from './src/screens/SignupScreen';
+import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import LeaderboardScreen from './src/screens/LeaderboardScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import YScreen from './src/screens/YScreen';
+import LogoutScreen from './src/screens/LogoutScreen';
 
 import NetlifeYFont from './assets/fonts/Netlife_Y-Bold.ttf';
+import styles from './src/styles/NavigatorStyles';
 
 const LoggedOut = createStackNavigator({
-  Loading: LoadingScreen,
-  Signup: SignupScreen,
+  Loading: {
+    screen: LoadingScreen,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: () => ({
+      header: null,
+      initialRouteName: 'Login',
+      drawerLabel: 'Log in',
+    }),
+  },
+  Signup: {
+    screen: SignupScreen,
+    navigationOptions: () => ({
+      header: null,
+      initialRouteName: 'Signup',
+      drawerLabel: 'Signup',
+    }),
+  },
 });
 
-const LoggedIn = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: () => ({
-      initialRouteName: 'HomeScreen',
+const LoggedInTabs = createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
       drawerLabel: 'Home',
-    }),
+    },
+    YScreen: {
+      screen: YScreen,
+      drawerLabel: 'Y Conference',
+    },
+    LogoutScreen: {
+      screen: LogoutScreen,
+      drawerLabel: 'Log out',
+    },
   },
-  LeaderboardScreen: {
-    screen: LeaderboardScreen,
-    navigationOptions: () => ({
-      initialRouteName: 'LeaderboardScreen',
-      drawerLabel: 'Leaderboard',
-    }),
+  { initialRouteName: 'Home' },
+);
+
+const LoggedIn = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        initialRouteName: 'HomeScreen',
+        drawerLabel: 'Home',
+      }),
+    },
+    YScreen: {
+      screen: YScreen,
+      navigationOptions: () => ({
+        initialRouteName: 'YScreen',
+        drawerLabel: 'Y Conference',
+      }),
+    },
+    LogoutScreen: {
+      screen: LogoutScreen,
+      navigationOptions: () => ({
+        initialRouteName: 'LogoutScreen',
+        drawerLabel: 'Log out',
+        headerMode: 'none',
+      }),
+    },
+    Tabs: {
+      screen: LoggedInTabs,
+    },
   },
-  ProfileScreen: {
-    screen: ProfileScreen,
-    navigationOptions: () => ({
-      initialRouteName: 'ProfileScreen',
-      drawerLabel: 'Profile',
-    }),
+  {
+    initialRouteName: 'Tabs',
   },
-});
+);
 
 const AppNavigator = createSwitchNavigator(
   {
@@ -77,6 +131,7 @@ export default class App extends React.Component {
     return (
       <Provider store={Store}>
         <StatusBar barStyle="dark-content" />
+        <View style={styles.navigator} />
         <AppContainer />
       </Provider>
     );

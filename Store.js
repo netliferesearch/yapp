@@ -7,5 +7,5 @@ import rootReducer from './src/reducers';
 
 const logger = createLogger();
 
-const middleware = applyMiddleware(promise, thunk, logger);
+const middleware = applyMiddleware(promise, thunk /*, logger */);
 export default createStore(rootReducer, middleware);

@@ -3,6 +3,8 @@ const theme = {
     yummyPink: '#FCF0EE',
     yellingRed: '#DD1215',
     yetiWhite: '#FFFFFF',
+    yellowYellow: '#FAE900',
+    yawingBlack: '#000000',
   },
   margins: {
     xs: 5,

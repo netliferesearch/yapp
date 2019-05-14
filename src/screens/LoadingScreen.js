@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import firebase from '../../firebaseConfig';
 
 import Logo from '../images/logo';
-import styles from '../styles/LoadingScreenStyles';
+import styles from '../styles/ScreenLoadingStyles';
 import theme from '../styles/theme';
 
 export default class Loading extends React.Component {
@@ -19,7 +19,7 @@ export default class Loading extends React.Component {
       if (user !== null) {
         this.props.navigation.navigate('Home');
       } else {
-        this.props.navigation.navigate('Signup');
+        this.props.navigation.navigate('Login');
       }
     });
   }

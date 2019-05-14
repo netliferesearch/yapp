@@ -32,15 +32,7 @@ export default class Header extends React.Component {
             <Logo sidebar={showSidebar} />
           </View>
         ) : (
-          <View style={styles.default}>
-            {customTitle === '' ? (
-              <View>
-                <Logo />
-              </View>
-            ) : (
-              <Text>{customTitle}</Text>
-            )}
-          </View>
+          <View style={styles.default}>{customTitle === '' ? <Logo /> : <Text>{customTitle}</Text>}</View>
         )}
       </React.Fragment>
     );

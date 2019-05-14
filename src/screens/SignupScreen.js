@@ -21,8 +21,11 @@ import { connect } from 'react-redux';
 import firebase from '../../firebaseConfig';
 import { fetchUnregisteredCardById, signupUser } from '../actions/SignupUser';
 
-import Logo from '../images/logo';
-import styles from '../styles/SignupScreenStyles';
+import Header from '../components/Header';
+import Input from '../components/Input';
+import Button from '../components/Button';
+
+import styles from '../styles/ScreenSignupStyles';
 
 class SignupScreen extends React.Component {
   constructor(props) {
@@ -76,41 +79,52 @@ class SignupScreen extends React.Component {
     const { cardId, nickname, email, password, signupPage } = this.state;
 
     return (
-      <View style={styles.screenWrapper}>
-        <View style={styles.logoWrapper}>
-          <Logo />
+      <View>
+        <Header />
+        <View style={styles.screenWrapper}>
+          <Text>What's in it for me text.</Text>
+          {signupPage === 2 ? (
+            <View>
+              <Text>Fill in personal info and create account.</Text>
+              <Input
+                type="text"
+                label="Email"
+                inputValue={returnedInput => {
+                  this.setState({ email: returnedInput });
+                }}
+              />
+              <Text>Nickname</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={nick => this.setState({ nickname: nick })}
+                value={nickname}
+              />
+              <Text>Email</Text>
+              <TextInput style={styles.input} onChangeText={mail => this.setState({ email: mail })} value={email} />
+              <Text>Password</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={pass => this.setState({ password: pass })}
+                value={this.state.password}
+              />
+              {nickname !== '' && email !== '' && password !== '' && (
+                <TouchableOpacity style={styles.button} onPress={this.onPressAccount}>
+                  <Text style={styles.buttonText}>Create account</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          ) : (
+            <View>
+              <Text>Input id located on your Y-badge.</Text>
+              <TextInput style={styles.input} onChangeText={id => this.setState({ cardId: id })} value={cardId} />
+              {cardId !== '' && (
+                <TouchableOpacity style={styles.button} onPress={this.onPressCardId}>
+                  <Text style={styles.buttonText}>Submit ID</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
         </View>
-        <Text>What's in it for me text.</Text>
-        {signupPage === 2 ? (
-          <View>
-            <Text>Fill in personal info and create account.</Text>
-            <Text>Nickname</Text>
-            <TextInput style={styles.input} onChangeText={nick => this.setState({ nickname: nick })} value={nickname} />
-            <Text>Email</Text>
-            <TextInput style={styles.input} onChangeText={mail => this.setState({ email: mail })} value={email} />
-            <Text>Password</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={pass => this.setState({ password: pass })}
-              value={this.state.password}
-            />
-            {nickname !== '' && email !== '' && password !== '' && (
-              <TouchableOpacity style={styles.button} onPress={this.onPressAccount}>
-                <Text style={styles.buttonText}>Create account</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        ) : (
-          <View>
-            <Text>Input id located on your Y-badge.</Text>
-            <TextInput style={styles.input} onChangeText={id => this.setState({ cardId: id })} value={cardId} />
-            {cardId !== '' && (
-              <TouchableOpacity style={styles.button} onPress={this.onPressCardId}>
-                <Text style={styles.buttonText}>Submit ID</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
       </View>
     );
   }

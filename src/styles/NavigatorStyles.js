@@ -2,11 +2,9 @@ import { StyleSheet } from 'react-native';
 import theme from './theme';
 
 const styles = StyleSheet.create({
-  default: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    paddingBottom: theme.margins.md,
+  navigator: {
     backgroundColor: theme.colors.yummyPink,
+    height: 50,
   },
 });
 

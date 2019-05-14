@@ -7,6 +7,8 @@ const actionType = {
   leaderboardRejected: 'LEADERBOARD_REJECTED',
   logoutFulfilled: 'LOGOUT_FULFILLED',
   logoutRejected: 'LOGOUT_REJECTED',
+  logInRejected: 'LOGIN_REJECTED',
+  logInFulfilled: 'LOGIN_FULFILLED',
   userSession: 'USER_SESSION',
 };
 

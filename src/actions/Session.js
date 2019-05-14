@@ -3,6 +3,47 @@ import actionType from '../utils/redux';
 import errorMsg from '../utils/errorMsg';
 
 const auth = firebase.auth();
+
+const logInUser = (email = null, pass = null) => dispatch => {
+  if (email && pass) {
+    auth
+      .signInWithEmailAndPassword(email.toLowerCase(), pass)
+      .then(() => {
+        dispatch({
+          type: actionType.logInFulfilled,
+          payload: true,
+        });
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        /**
+         * Add custom error messages for:
+         * auth/invalid-email
+         * auth/user-not-found
+         * auth/wrong-password
+         */
+        let errorMessage = '';
+        switch (errorCode) {
+          case 'auth/user-disabled':
+            errorMessage = 'Your account is disabled.';
+            break;
+          default:
+            errorMessage = 'Email or password is invalid.';
+            break;
+        }
+        dispatch({
+          type: actionType.logInRejected,
+          error: errorMessage,
+        });
+      });
+  } else {
+    dispatch({
+      type: actionType.logInRejected,
+      error: errorMsg('Login', null, 'Email or pass is missing..'),
+    });
+  }
+};
+
 /**
  * @param {string} uid
  */
@@ -38,4 +79,4 @@ const checkUserSession = () => dispatch => {
   });
 };
 
-export { logoutUser, checkUserSession };
+export { logInUser, logoutUser, checkUserSession };

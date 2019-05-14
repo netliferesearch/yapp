@@ -4,10 +4,9 @@ import propTypes from 'prop-types';
 import firebase from '../../firebaseConfig';
 
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 import theme from '../styles/theme';
-import styles from '../styles/HomeScreenStyles';
+import styles from '../styles/ScreenHomeStyles';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -71,7 +70,6 @@ export default class HomeScreen extends React.Component {
             <Text style={theme.buttonText}>Logout</Text>
           </TouchableOpacity>
         </View>
-        <Footer />
       </View>
     );
   }
