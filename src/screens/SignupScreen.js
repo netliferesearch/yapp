@@ -12,7 +12,7 @@
  * and only then a user can be linked to that cardId.
  */
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import propTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
@@ -85,43 +85,28 @@ class SignupScreen extends React.Component {
           <Text>What's in it for me text.</Text>
           {signupPage === 2 ? (
             <View>
+              {
+                // Todo: Return error if fields are empty, password is weak or email does/doesn't exist.
+              }
               <Text>Fill in personal info and create account.</Text>
-              <Input
-                type="text"
-                label="Email"
-                inputValue={returnedInput => {
-                  this.setState({ email: returnedInput });
-                }}
-              />
-              <Text>Nickname</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={nick => this.setState({ nickname: nick })}
-                value={nickname}
-              />
-              <Text>Email</Text>
-              <TextInput style={styles.input} onChangeText={mail => this.setState({ email: mail })} value={email} />
-              <Text>Password</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={pass => this.setState({ password: pass })}
-                value={this.state.password}
-              />
+              <Input type="text" label="Nickname" inputValue={nick => this.setState({ nickname: nick })} />
+              <Input type="text" label="Email" inputValue={mail => this.setState({ email: mail })} />
+              <Input type="password" label="Password" inputValue={pass => this.setState({ password: pass })} />
               {nickname !== '' && email !== '' && password !== '' && (
-                <TouchableOpacity style={styles.button} onPress={this.onPressAccount}>
-                  <Text style={styles.buttonText}>Create account</Text>
-                </TouchableOpacity>
+                <Button type="primary" value="Create account" onPressCallback={this.onPressAccount} />
               )}
             </View>
           ) : (
             <View>
-              <Text>Input id located on your Y-badge.</Text>
-              <TextInput style={styles.input} onChangeText={id => this.setState({ cardId: id })} value={cardId} />
-              {cardId !== '' && (
-                <TouchableOpacity style={styles.button} onPress={this.onPressCardId}>
-                  <Text style={styles.buttonText}>Submit ID</Text>
-                </TouchableOpacity>
-              )}
+              {
+                // Todo: Return error if card is not found.
+              }
+              <Input
+                type="text"
+                label="Input id located on your Y-badge."
+                inputValue={id => this.setState({ cardId: id })}
+              />
+              {cardId !== '' && <Button type="primary" value="Submit ID" onPressCallback={this.onPressCardId} />}
             </View>
           )}
         </View>
