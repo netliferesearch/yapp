@@ -1,48 +1,27 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import propTypes from 'prop-types';
-import Logo from '../../images/logo';
-import styles from '../../styles/HeaderStyles';
+import TopText from './TopText';
+import Hamburger from './Hamburger';
+import styles from './styles';
 
-export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
+const Header = props => {
+  const { infoText } = props;
+  return (
+    <View style={styles.headerContainer}>
+      <TopText {...props} text={['Y', 'Oslo']} />
+      {infoText && <TopText {...props} text={['Youngstorget', '25.09 - 27.09.2019']} />}
+      <Hamburger open={false} {...props} />
+    </View>
+  );
+};
 
-    this.state = {
-      showSidebar: false,
-      customTitle: '',
-    };
-  }
-
-  componentDidMount() {
-    const { sidebar } = this.props;
-
-    this.setState({
-      showSidebar: sidebar,
-    });
-  }
-
-  render() {
-    const { showSidebar, customTitle } = this.state;
-
-    return (
-      <React.Fragment>
-        {showSidebar ? (
-          <View style={styles.sidebar}>
-            <Logo sidebar={showSidebar} />
-          </View>
-        ) : (
-          <View style={styles.default}>{customTitle === '' ? <Logo /> : <Text>{customTitle}</Text>}</View>
-        )}
-      </React.Fragment>
-    );
-  }
-}
+export default Header;
 
 Header.defaultProps = {
-  sidebar: false,
+  infoText: false,
 };
 
 Header.propTypes = {
-  sidebar: propTypes.bool,
+  infoText: propTypes.bool,
 };

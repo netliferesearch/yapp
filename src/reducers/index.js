@@ -1,15 +1,13 @@
 import { combineReducers } from 'redux';
 
 // Import reducers
-import { card, userSignedUp, userLoggedIn } from './UserReducer';
+import speakersRead from './SpeakersReducer';
 
 const appReducer = combineReducers({
-  card,
-  userSignedUp,
-  userLoggedIn,
+  speakersRead,
 });
 
 // eslint-disable-next-line no-undef
-export default (rootReducer = (state, action) => {
+export default rootReducer = (state, action) => {
   return appReducer(state, action);
-});
+};

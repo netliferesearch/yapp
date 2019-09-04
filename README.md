@@ -1,6 +1,6 @@
-# yapp
-Checkin application for Y conference 2019. Yapp!
-Yapp is built on Expo (React Native), Redux, React Navigation and Firebase for data storage.
+# Y Oslo
+Official Y Oslo 2019 conference app.
+Y Oslo is built on Expo (React Native), Redux, React Navigation and Sanity for data fetching.
 
 # Requirements
 This project is using Expo. You need to have an account and download Expo app. This project was built on Node v10.
@@ -8,8 +8,22 @@ This project is using Expo. You need to have an account and download Expo app. T
 # Functionality
 
 App.js
-  - Is importing screens (pages), statusbar, Redux store, provider and font.
-  - React Navigation creates two stacs. Logged out and logged in stack. Loadingscreen is used for auth check.
+  - Imports routes, statusbar, Redux store, provider and font.
+src/actions
+  - Actions are stacked in categories. With that said, each file can have multiple actions.
+  - Naming tip. CRUD (stands for Create, Read, Update, Delete) + what. Example: readSpeakers or updateSpeakers
+src/components
+  - primitives folder contains all primitive components such as buttons, input fields etc.
+  - Camel cased folders can contain several components. Each component in a parent folder. Example: Card/Hero or just Card.
+  - All components has their own styled component style that can use global styles from theme, font etc.
+src/reducers
+  - index.js is where you add all redux reducers for combining.
+  - Reducer files are stacked in same type of categories as actions.
+  - Naming tip. what + CRUD. Example: speakersRead or speakersUpdated.
+src/screens
+  - Screen is a page/view that is routed with routes/StacknavigatorRoutes.js
+  - All Screens should have index.js where the screen logic should be. 
+
 
 User auth is checked with Loadingscreen. If authenticated you will end at Homescreen. This screen will show all your yapps on all stations and separate yapps on each station. Homescreen will also display total yapps of the conference.
 At time of writing 27 June. The functionality is poor and not fetched with redux properly.
