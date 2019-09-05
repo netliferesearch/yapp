@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://mu-b2s.anonymous.yapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.mu-b2s.anonymous.yapp.exp.direct",
-  "ngrokPid": 75146,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "packagerPort": 19007,
-  "packagerPid": 75110
+  "packagerPort": null,
+  "packagerPid": null
 }

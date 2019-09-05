@@ -15,7 +15,12 @@ export default class Speakers extends React.Component {
 
     return (
       <View style={styles.speakers}>
-        <Text>List with speakers {speakers}</Text>
+        {typeof speakers !== 'undefined' && (
+          <React.Fragment>
+            {console.log('SPEAKERS', speakers)}
+            <Text>List with speakers</Text>
+          </React.Fragment>
+        )}
       </View>
     );
   }
