@@ -8,7 +8,7 @@ import styles from './styles';
 export default class SpeakerList extends React.Component {
   render() {
     const { speakers } = this.props;
-    const { title, position, image, employer, slug } = speakers.item;
+    const { _id, title, position, image, employer, slug } = speakers.item;
     // Check that all speakerdata is in order.
     // Todo: Create a data checker helper function to utility.
     const speakerTitle = typeof title === 'object' && typeof title.nb !== 'undefined' ? title.nb : '';
@@ -26,6 +26,7 @@ export default class SpeakerList extends React.Component {
       employer: speakerEmployer,
       image: speakerImage,
       slug: speakerSlug,
+      uid: _id,
     };
 
     return (
@@ -48,11 +49,11 @@ export default class SpeakerList extends React.Component {
 }
 
 SpeakerList.defaultProps = {
-  speakers: null,
+  speakers: {},
   onSelect: () => {},
 };
 
 SpeakerList.propTypes = {
   onSelect: propTypes.func,
-  speakers: propTypes.shape(),
+  speakers: propTypes.any,
 };
