@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import propTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import fetchSpeakers from '../../actions/SpeakersAction';
+import readSpeakers from '../../actions/SpeakersAction';
 // Others
 import Header from '../../components/Header';
 import Speakers from '../../components/Speakers';
@@ -17,7 +17,7 @@ export class SpeakersScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchSpeakers();
+    this.props.readSpeakers();
   }
 
   render() {
@@ -32,9 +32,13 @@ export class SpeakersScreen extends React.Component {
     );
   }
 }
+
 const mapStateToProps = state => {
-  const { speakersRead } = state;
-  return { speakers: speakersRead.speakers };
+  const { speakerExtraRead, speakersRead } = state;
+  return {
+    speakers: speakersRead.speakers,
+    speakerExtra: speakerExtraRead.speaker,
+  };
 };
 
 // Make actions accessable from props
@@ -42,7 +46,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      fetchSpeakers,
+      readSpeakers,
     },
     dispatch,
   );
@@ -54,5 +58,5 @@ export default connect(
 )(SpeakersScreen);
 
 SpeakersScreen.propTypes = {
-  fetchSpeakers: propTypes.func.isRequired,
+  readSpeakers: propTypes.func.isRequired,
 };

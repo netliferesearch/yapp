@@ -35,6 +35,11 @@ const theme = {
 };
 
 const font = {
+  smRegular: {
+    fontFamily: theme.fontFamily.regular,
+    fontSize: theme.fontSize.sm,
+    lineHeight: theme.fontSize.sm,
+  },
   smBold: {
     fontFamily: theme.fontFamily.bold,
     fontSize: theme.fontSize.sm,

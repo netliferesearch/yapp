@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions, SafeAreaView, StatusBar, View } from 'react-native';
-import { Font, AppLoading } from 'expo';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
 import { Provider } from 'react-redux';
 import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 
