@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
     color: theme.colors.black,
   },
+  innerWrapper: {
+    marginRight: theme.margins.md,
+    marginLeft: theme.margins.md,
+  },
 });
 
 export default styles;

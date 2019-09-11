@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import Header from '../../components/Header';
 import Hero from '../../components/Card/Hero';
+import Calendar from '../../components/Calendar';
 import styles from './styles';
 
 export default class MainScreen extends React.Component {
@@ -18,6 +19,9 @@ export default class MainScreen extends React.Component {
       <View style={styles.screenWrapper}>
         <Header {...this.props} infoText />
         <Hero />
+        <View style={styles.innerWrapper}>
+          <Calendar />
+        </View>
       </View>
     );
   }
