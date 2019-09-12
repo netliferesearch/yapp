@@ -47,7 +47,7 @@ export default function readSpeakerExtra(slug = '') {
         .catch(err => {
           dispatch({
             type: actionType.speakerReadRejected,
-            error: `Error while readingSpeker. Status message: ${err.message}`,
+            error: `Error while reading speaker. Status message: ${err.message}`,
           });
         });
     }
