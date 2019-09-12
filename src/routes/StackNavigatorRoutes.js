@@ -4,6 +4,7 @@ import SpeakerScreen from '../screens/SpeakerScreen';
 import WorkshopScreen from '../screens/WorkshopScreen';
 import TalkScreen from '../screens/TalkScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import SponsorsScreen from '../screens/SponsorsScreen';
 
 const StackNavigatorRoutes = {
   MainScreen: { screen: MainScreen },
@@ -12,6 +13,7 @@ const StackNavigatorRoutes = {
   WorkshopScreen: { screen: WorkshopScreen },
   TalkScreen: { screen: TalkScreen },
   CalendarScreen: { screen: CalendarScreen },
+  SponsorsScreen: { screen: SponsorsScreen },
 };
 
 export default StackNavigatorRoutes;
