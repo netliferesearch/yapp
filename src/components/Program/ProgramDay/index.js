@@ -25,6 +25,7 @@ export default class ProgramDay extends React.Component {
       const endTime = typeof track.endTime !== 'undefined' ? track.endTime : null;
       const trackSession = typeof track.session !== 'undefined' ? track.session : null;
       const trackKey = typeof track._key !== 'undefined' ? track._key : null;
+
       if (startTime && trackSession) {
         sortedSlots.push({
           trackKey,

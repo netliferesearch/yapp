@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   titleFontProperties: {
     marginBottom: theme.margins.sm,
   },
+  times: font.smBold,
 });
 
 export default styles;

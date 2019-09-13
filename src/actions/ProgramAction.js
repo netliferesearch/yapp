@@ -5,7 +5,8 @@ import sanity from '../../sanity';
 YellowBox.ignoreWarnings(['Setting a timer']);
 
 export default function readProgram() {
-  const query = `*[_type == 'program' && title.nb == 'Y'] | order(title['nb'] asc) {
+  const query = `*[_type == 'program' && _id == 'c5da52e7-cac7-4059-871f-73b1b8bcf2a8'] | order(title['nb'] asc) {
+    _id,
     programArray[] {
       _key,
       postTitle,

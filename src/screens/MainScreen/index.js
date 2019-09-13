@@ -9,7 +9,7 @@ import readSpeakers from '../../actions/SpeakersAction';
 // Components
 import Header from '../../components/Header';
 import Hero from '../../components/Card/Hero';
-import Calendar from '../../components/Program';
+import Program from '../../components/Program';
 // Other
 import convertUnicode from '../../utils/unicodeChars';
 import styles from './styles';
@@ -39,7 +39,7 @@ export class MainScreen extends React.Component {
                 {`${convertUnicode('\u2193')} ${convertUnicode('\u2193')} ${convertUnicode('\u2193')}`}
               </Text>
             </View>
-            <Calendar {...this.props} />
+            <Program {...this.props} />
           </View>
         </ScrollView>
       </View>

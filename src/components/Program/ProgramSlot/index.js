@@ -9,7 +9,7 @@ export const ProgramSlot = props => {
   const { slot } = props;
   const programStart = apiToValueChecker(slot, 'item', 'startTime') ? slot.item.startTime : '';
   const programEnd = apiToValueChecker(slot, 'item', 'endTime') ? slot.item.endTime : null;
-
+  console.log(programStart);
   const start = programStart.substring(programStart.indexOf('T') + 1).substring(0, 5);
   const end = programEnd.substring(programEnd.indexOf('T') + 1).substring(0, 5);
 
@@ -22,8 +22,10 @@ export const ProgramSlot = props => {
   return (
     <View style={styles.programSlotContainer}>
       <View style={styles.leftColumn}>
-        {programStart && <Text>{start}</Text>}
-        {programEnd && <Text>{end}</Text>}
+        <View>
+          {programStart && <Text style={styles.times}>{`${start}${programEnd && ' -'}`}</Text>}
+          {programEnd && <Text style={styles.times}>{end}</Text>}
+        </View>
       </View>
       <View style={styles.rightColumn}>
         {programTitle && (

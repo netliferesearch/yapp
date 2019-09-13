@@ -1,14 +1,14 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import readProgram from '../../actions/ProgramAction';
 
-// Others
+// Components
 import Header from '../../components/Header';
 import Program from '../../components/Program';
+// Others
+import convertUnicode from '../../utils/unicodeChars';
 import styles from './styles';
 
 export class ProgramScreen extends React.Component {
@@ -17,21 +17,22 @@ export class ProgramScreen extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    this.props.readProgram();
-  }
-
   render() {
-    const { program } = this.props;
     return (
-      <ScrollView style={styles.screenWrapper}>
+      <View style={styles.screenWrapper}>
         <Header {...this.props} />
-        <View style={styles.screenInnerWrapper}>
-          <View style={styles.content}>
-            <Program />
+        <ScrollView>
+          <View style={styles.screenInnerWrapper}>
+            <View style={styles.intro}>
+              <Text style={styles.introHead}>PROGRAM</Text>
+              <Text style={styles.introArrow}>
+                {`${convertUnicode('\u2193')} ${convertUnicode('\u2193')} ${convertUnicode('\u2193')}`}
+              </Text>
+            </View>
+            <Program {...this.props} />
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -44,20 +45,9 @@ const mapStateToProps = state => {
   };
 };
 
-// Make actions accessable from props
-// eslint-disable-next-line arrow-body-style
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readProgram,
-    },
-    dispatch,
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(ProgramScreen);
 
 ProgramScreen.defaultProps = {
@@ -66,5 +56,4 @@ ProgramScreen.defaultProps = {
 
 ProgramScreen.propTypes = {
   program: propTypes.oneOfType([propTypes.shape(), propTypes.array]),
-  readProgram: propTypes.func.isRequired,
 };
