@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import readSponsors from '../../actions/SponsorsAction';
 // Others
 import Header from '../../components/Header';
-
+import Sponsors from '../../components/Sponsors';
 import styles from './styles';
 
 export default class SponsorsScreen extends React.Component {
@@ -19,11 +19,14 @@ export default class SponsorsScreen extends React.Component {
     this.props.readSponsors();
   }
 
+  render() {
     return (
       <ScrollView style={styles.screenWrapper}>
         <Header {...this.props} />
         <View style={styles.screenInnerWrapper}>
-
+          <View style={styles.content}>
+            <Sponsors />
+          </View>
         </View>
       </ScrollView>
     );
