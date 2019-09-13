@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../styles/theme';
+import { theme, font } from '../../styles/theme';
 
 const styles = StyleSheet.create({
   screenWrapper: {
@@ -11,6 +11,13 @@ const styles = StyleSheet.create({
   screenInnerWrapper: {
     marginLeft: theme.margins.md,
     marginRight: theme.margins.md,
+  },
+  sponsorFont: font.xlBold,
+  sponsorFontProperties: {
+    marginBottom: theme.margins.md,
+  },
+  partnersContainer: {
+    marginBottom: theme.margins.xl,
   },
 });
 

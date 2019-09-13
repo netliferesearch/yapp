@@ -7,6 +7,8 @@ const actionType = {
   speakerReadWorkshopRejected: 'SPEAKER_WORKSHOP_REJECTED',
   speakerReadTalkFulfilled: 'SPEAKER_TALK_FETCHED',
   speakerReadTalkRejected: 'SPEAKER_TALK_REJECTED',
+  sponsorsReadFulfilled: 'SPONSORS_FETCHED',
+  sponsorsReadRejected: 'SPONSORS_REJECTED',
 };
 
 export default actionType;
