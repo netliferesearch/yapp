@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
