@@ -15,12 +15,12 @@ export default class MainMenu extends React.Component {
           screen: 'MainScreen',
         },
         {
-          name: 'Calendar',
-          screen: 'CalendarScreen',
+          name: 'Program',
+          screen: 'ProgramScreen',
         },
         {
-          name: 'My Calendar',
-          screen: 'MyCalendarScreen',
+          name: 'My Programs',
+          screen: 'MyProgramsScreen',
         },
         {
           name: 'Speakers',

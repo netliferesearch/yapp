@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: theme.margins.sm,
     paddingBottom: theme.margins.sm,
-    borderTopWidth: 3,
+    borderBottomWidth: 3,
     borderColor: theme.colors.black,
   },
   imageWrapper: {

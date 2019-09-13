@@ -25,7 +25,8 @@ export default class Hero extends React.Component {
 
     return (
       <View style={styles.card}>
-        {animateY && (
+        <Text style={styles.yFont}>Y</Text>
+        {/*animateY && (
           <RotateElement from="0deg" to="-90deg" duration={500} delay={2000}>
             <Text style={styles.yFont}>Y</Text>
           </RotateElement>
@@ -34,7 +35,7 @@ export default class Hero extends React.Component {
           <RotateElement from="0deg" to="-90deg" duration={500}>
             <Text style={styles.arrowFont}>{convertUnicode('\u2190')}</Text>
           </RotateElement>
-        )}
+        )*/}
       </View>
     );
   }

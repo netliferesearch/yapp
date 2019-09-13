@@ -1,37 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import readSpeakers from '../../actions/SpeakersAction';
+
 // Others
 import Header from '../../components/Header';
 import Speakers from '../../components/Speakers';
 import styles from './styles';
 
-export class SpeakersScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.props.readSpeakers();
-  }
-
-  render() {
-    return (
-      <View style={styles.screenWrapper}>
-        <Header {...this.props} />
-        <View style={styles.screenInnerWrapper}>
-          <Text style={[styles.headingFont, styles.heading]}>SPEAKERS</Text>
-          <Speakers {...this.props} />
-        </View>
+export const SpeakersScreen = props => {
+  return (
+    <View style={styles.screenWrapper}>
+      <Header {...props} />
+      <View style={styles.screenInnerWrapper}>
+        <Speakers {...props} />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const mapStateToProps = state => {
   const { speakerExtraRead, speakersRead } = state;
@@ -41,22 +28,14 @@ const mapStateToProps = state => {
   };
 };
 
-// Make actions accessable from props
-// eslint-disable-next-line arrow-body-style
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readSpeakers,
-    },
-    dispatch,
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(SpeakersScreen);
 
+SpeakersScreen.defaultProps = {
+  speakers: [],
+};
 SpeakersScreen.propTypes = {
-  readSpeakers: propTypes.func.isRequired,
+  speakers: propTypes.array,
 };

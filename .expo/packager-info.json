@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": "https://b8-s4i.anonymous.yapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.b8-s4i.anonymous.yapp.exp.direct",
-  "ngrokPid": 77055,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://u9-857.anonymous.yapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.u9-857.anonymous.yapp.exp.direct",
+  "ngrokPid": 51700,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19009,
+  "packagerPid": 51663
 }

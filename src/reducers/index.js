@@ -5,12 +5,14 @@ import speakersRead from './SpeakersReducer';
 import speakerExtraRead from './SpeakerReducer';
 import speakerWorkshopRead from './SpeakerWorkshopReducer';
 import speakerTalkRead from './SpeakerTalkReducer';
+import programRead from './ProgramReducer';
 
 const appReducer = combineReducers({
   speakersRead,
   speakerExtraRead,
   speakerWorkshopRead,
   speakerTalkRead,
+  programRead,
 });
 
 // eslint-disable-next-line no-undef

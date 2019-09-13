@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -8,26 +8,27 @@ import readProgram from '../../actions/ProgramAction';
 
 // Others
 import Header from '../../components/Header';
-import Calendar from '../../components/Calendar';
+import Program from '../../components/Program';
 import styles from './styles';
 
-export class CalendarScreen extends React.Component {
+export class ProgramScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   componentDidMount() {
-    // this.props.readProgram();
+    this.props.readProgram();
   }
 
   render() {
+    const { program } = this.props;
     return (
       <ScrollView style={styles.screenWrapper}>
         <Header {...this.props} />
         <View style={styles.screenInnerWrapper}>
           <View style={styles.content}>
-            <Calendar />
+            <Program />
           </View>
         </View>
       </ScrollView>
@@ -36,9 +37,10 @@ export class CalendarScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { speakersRead } = state;
+  const { speakersRead, programRead } = state;
   return {
     speakers: speakersRead.speakers,
+    program: programRead.program,
   };
 };
 
@@ -56,8 +58,13 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CalendarScreen);
+)(ProgramScreen);
 
-CalendarScreen.defaultProps = {};
+ProgramScreen.defaultProps = {
+  program: {},
+};
 
-CalendarScreen.propTypes = {};
+ProgramScreen.propTypes = {
+  program: propTypes.oneOfType([propTypes.shape(), propTypes.array]),
+  readProgram: propTypes.func.isRequired,
+};

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   heroWrapper: {
     flex: 1,
     flexDirection: 'column',
-    marginTop: theme.margins.md,
+    marginBottom: theme.margins.lg,
   },
   hero: {
     maxWidth: 250,

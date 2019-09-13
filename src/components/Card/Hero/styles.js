@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     marginRight: theme.margins.md,
     backgroundColor: theme.colors.green,
     padding: 40,
-    margin: theme.margins.xl,
+    marginBottom: theme.margins.xl,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',

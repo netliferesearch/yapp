@@ -12,10 +12,6 @@ const styles = StyleSheet.create({
     marginLeft: theme.margins.md,
     marginRight: theme.margins.md,
   },
-  headingFont: font.xlBold,
-  heading: {
-    marginTop: theme.margins.lg,
-  },
 });
 
 export default styles;
