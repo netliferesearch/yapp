@@ -10,7 +10,7 @@ import Header from '../../components/Header';
 import Sponsors from '../../components/Sponsors';
 import styles from './styles';
 
-export default class SponsorsScreen extends React.Component {
+export class SponsorsScreen extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -40,8 +40,12 @@ const mapDispatchToProps = dispatch => {
     dispatch,
   );
 };
-SponsorsScreen.defaultProps = {};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SponsorsScreen);
 
 SponsorsScreen.propTypes = {
-  readSpeakers: propTypes.func.isRequired,
+  readSponsors: propTypes.func.isRequired,
 };
