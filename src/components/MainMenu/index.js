@@ -28,7 +28,7 @@ export default class MainMenu extends React.Component {
         },
         {
           name: 'About Y',
-          screen: 'AboutScreen',
+          screen: 'AboutYScreen',
         },
         {
           name: 'Sponsors',
