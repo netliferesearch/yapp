@@ -34,6 +34,10 @@ export default class MainMenu extends React.Component {
           name: 'Sponsors',
           screen: 'SponsorsScreen',
         },
+        {
+          name: 'Y Map',
+          screen: 'YMapScreen',
+        },
       ],
     };
   }

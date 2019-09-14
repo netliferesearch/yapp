@@ -62,4 +62,20 @@ const font = {
   },
 };
 
-export { theme, font };
+const screen = {
+  wrapper: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: theme.colors.white,
+    color: theme.colors.black,
+  },
+  innerWrapper: {
+    marginLeft: theme.margins.md,
+    marginRight: theme.margins.md,
+  },
+  centeredContent: {
+    alignItems: 'center',
+  },
+};
+
+export { theme, font, screen };
