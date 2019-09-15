@@ -27,8 +27,10 @@ const Talk = props => {
             .split(' ')
             .join('\n')
             .toUpperCase()}
-          align="left"
-          isTwoThirds
+          options={{
+            align: 'left',
+            isTwoThirds: true,
+          }}
         />
       </View>
       <View style={styles.content}>

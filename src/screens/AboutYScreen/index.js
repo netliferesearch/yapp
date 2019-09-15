@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import readAboutArticle from '../../actions/AboutAction';
 // Components
 import Header from '../../components/Header';
+import Card from '../../components/Card';
 // Others
+import apiToValueChecker from '../../utils/apiToValue';
 import styles from './styles';
 
 export class AboutYScreen extends React.Component {
@@ -22,13 +24,40 @@ export class AboutYScreen extends React.Component {
 
   render() {
     const { article } = this.props;
-    console.log('IN RENDER', article);
+    const title = apiToValueChecker(article, 'title', 'nb') ? article.title.nb : null;
+    const longTitle = apiToValueChecker(article, 'longTitle', 'nb') ? article.longTitle.nb : null;
+    const lead = apiToValueChecker(article, 'lead', 'nb') ? article.lead.nb : null;
     return (
       <View style={styles.screenWrapper}>
         <Header {...this.props} />
         <ScrollView style={styles.screenInnerWrapper}>
           <View style={styles.partnersContainer}>
-            <Text style={[styles.sponsorFont, styles.sponsorFontProperties]}>ABOUT Y</Text>
+            {longTitle && lead ? (
+              <View>
+                <Card
+                  title={longTitle
+                    .split(' ')
+                    .join('\n')
+                    .toUpperCase()}
+                  text={lead}
+                  options={{
+                    align: 'left',
+                    isTwoThirds: true,
+                    switchFontSizes: true,
+                    backgroundBlack: true,
+                  }}
+                />
+              </View>
+            ) : (
+              title && (
+                <Text style={[styles.sponsorFont, styles.sponsorFontProperties]}>
+                  {title
+                    .split(' ')
+                    .join('\n')
+                    .toUpperCase()}
+                </Text>
+              )
+            )}
           </View>
         </ScrollView>
       </View>
