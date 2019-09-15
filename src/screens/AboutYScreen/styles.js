@@ -12,11 +12,7 @@ const styles = StyleSheet.create({
     marginLeft: theme.margins.md,
     marginRight: theme.margins.md,
   },
-  sponsorFont: font.xlBold,
-  sponsorFontProperties: {
-    marginBottom: theme.margins.md,
-  },
-  partnersContainer: {
+  blockContainer: {
     marginBottom: theme.margins.xl,
   },
 });

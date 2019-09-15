@@ -8,6 +8,7 @@ import readAboutArticle from '../../actions/AboutAction';
 // Components
 import Header from '../../components/Header';
 import Card from '../../components/Card';
+import SanityBlockContent from '../../components/SanityBlockContent';
 // Others
 import apiToValueChecker from '../../utils/apiToValue';
 import styles from './styles';
@@ -22,16 +23,28 @@ export class AboutYScreen extends React.Component {
     this.props.readAboutArticle();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  renderBody(body) {
+    if (typeof body !== 'undefined') {
+      return Object.keys(body).map(i => (
+        <SanityBlockContent key={`about-blocks-${i}`} blocks={body[i].introArray.nb} />
+      ));
+    }
+    return null;
+  }
+
   render() {
     const { article } = this.props;
     const title = apiToValueChecker(article, 'title', 'nb') ? article.title.nb : null;
     const longTitle = apiToValueChecker(article, 'longTitle', 'nb') ? article.longTitle.nb : null;
     const lead = apiToValueChecker(article, 'lead', 'nb') ? article.lead.nb : null;
+    const body = typeof article.body !== 'undefined' ? article.body : {};
+
     return (
       <View style={styles.screenWrapper}>
         <Header {...this.props} />
         <ScrollView style={styles.screenInnerWrapper}>
-          <View style={styles.partnersContainer}>
+          <View style={styles.blockContainer}>
             {longTitle && lead ? (
               <View>
                 <Card
@@ -59,6 +72,7 @@ export class AboutYScreen extends React.Component {
               )
             )}
           </View>
+          <View style={styles.blockContainer}>{Object.keys(body).map(() => this.renderBody(body))}</View>
         </ScrollView>
       </View>
     );

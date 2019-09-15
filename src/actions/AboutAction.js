@@ -11,6 +11,7 @@ export default function readAboutArticle() {
     lead,
     longTitle,
     slug,
+    body[],
   }`;
   return dispatch => {
     sanity
