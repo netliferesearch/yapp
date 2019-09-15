@@ -7,6 +7,7 @@ import speakerWorkshopRead from './SpeakerWorkshopReducer';
 import speakerTalkRead from './SpeakerTalkReducer';
 import sponsorsRead from './SponsorsReducer';
 import myProgramsRead from './MyProgramsReducer';
+import aboutArticleRead from './AboutReducer';
 
 const appReducer = combineReducers({
   speakersRead,
@@ -15,6 +16,7 @@ const appReducer = combineReducers({
   speakerTalkRead,
   sponsorsRead,
   myProgramsRead,
+  aboutArticleRead,
 });
 
 // eslint-disable-next-line no-undef

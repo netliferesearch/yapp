@@ -11,6 +11,8 @@ const actionType = {
   sponsorsReadRejected: 'SPONSORS_REJECTED',
   myProgramsReadFulfilled: 'MY_PROGRAMS_FETCHED',
   myProgramsReadRejected: 'MY_PROGRAMS_REJECTED',
+  aboutArticleReadFulfilled: 'ABOUT_Y_ARTICLE_FETCHED',
+  aboutArticleReadRejected: 'ABOUT_Y_ARTICLE_REJECTED',
 };
 
 export default actionType;

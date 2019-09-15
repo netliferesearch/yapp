@@ -6,7 +6,25 @@ import propTypes from 'prop-types';
 import { theme, font } from '../../styles/theme';
 
 const BlockRenderer = props => {
-  return <Text style={[font.smRegular, { marginBottom: theme.margins.md }]}>{props.children}</Text>;
+  let markup = null;
+  switch (props.node.style) {
+    case 'h2':
+      markup = (
+        <Text style={[font.mdBold, { marginTop: theme.margins.md, marginBottom: theme.margins.sm }]}>
+          {props.children}
+        </Text>
+      );
+      break;
+    case 'normal':
+    default:
+      markup = (
+        <Text style={[font.smRegular, { marginTop: theme.margins.md, marginBottom: theme.margins.xs }]}>
+          {props.children}
+        </Text>
+      );
+      break;
+  }
+  return markup;
 };
 const SanityBlockContent = props => {
   const { blocks } = props;

@@ -75,8 +75,11 @@ export class SpeakerScreen extends React.Component {
               <Card
                 title="TALK AT Y"
                 text={talkName.toUpperCase()}
-                arrow
                 pressed={() => navigation.navigate('TalkScreen', talkProps)}
+                options={{
+                  arrow: true,
+                  align: 'center',
+                }}
               />
             </View>
           )}
@@ -85,8 +88,11 @@ export class SpeakerScreen extends React.Component {
               <Card
                 title="WORKSHOP AT Y"
                 text={workshopName.toUpperCase()}
-                arrow
                 pressed={() => navigation.navigate('WorkshopScreen', talkProps)}
+                options={{
+                  arrow: true,
+                  align: 'center',
+                }}
               />
             </View>
           )}

@@ -7,6 +7,7 @@ import CalendarScreen from '../screens/CalendarScreen';
 import SponsorsScreen from '../screens/SponsorsScreen';
 import YMapScreen from '../screens/YMapScreen';
 import MyProgramsScreen from '../screens/MyProgramsScreen';
+import AboutYScreen from '../screens/AboutYScreen';
 
 const StackNavigatorRoutes = {
   MainScreen: { screen: MainScreen },
@@ -18,6 +19,7 @@ const StackNavigatorRoutes = {
   SponsorsScreen: { screen: SponsorsScreen },
   YMapScreen: { screen: YMapScreen },
   MyProgramsScreen: { screen: MyProgramsScreen },
+  AboutYScreen: { screen: AboutYScreen },
 };
 
 export default StackNavigatorRoutes;
