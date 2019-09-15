@@ -38,6 +38,10 @@ export default class MainMenu extends React.Component {
           name: 'Y Map',
           screen: 'YMapScreen',
         },
+        {
+          name: 'My Programs',
+          screen: 'MyProgramsScreen',
+        },
       ],
     };
   }

@@ -9,6 +9,8 @@ const actionType = {
   speakerReadTalkRejected: 'SPEAKER_TALK_REJECTED',
   sponsorsReadFulfilled: 'SPONSORS_FETCHED',
   sponsorsReadRejected: 'SPONSORS_REJECTED',
+  myProgramsReadFulfilled: 'MY_PROGRAMS_FETCHED',
+  myProgramsReadRejected: 'MY_PROGRAMS_REJECTED',
 };
 
 export default actionType;
