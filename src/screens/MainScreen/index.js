@@ -56,12 +56,12 @@ export class MainScreen extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const { speakersRead, programRead, favorites } = state;
+  const { speakersRead, programRead, favoritesRead } = state;
 
   return {
     speakers: speakersRead.speakers,
     program: programRead.program,
-    favorites: favorites.favorites,
+    favorites: favoritesRead.favorites,
   };
 };
 

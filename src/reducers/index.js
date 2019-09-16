@@ -6,7 +6,7 @@ import speakerExtraRead from './SpeakerReducer';
 import speakerWorkshopRead from './SpeakerWorkshopReducer';
 import speakerTalkRead from './SpeakerTalkReducer';
 import sponsorsRead from './SponsorsReducer';
-import favorites from './Favorites';
+import favoritesRead from './FavoritesReducer';
 import aboutArticleRead from './AboutReducer';
 import programRead from './ProgramReducer';
 
@@ -16,7 +16,7 @@ const appReducer = combineReducers({
   speakerWorkshopRead,
   speakerTalkRead,
   sponsorsRead,
-  favorites,
+  favoritesRead,
   aboutArticleRead,
   programRead,
 });

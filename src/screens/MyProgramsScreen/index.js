@@ -6,14 +6,14 @@ import { toggleFavorite } from '../../actions/FavoritesAction';
 import { ProgramScreen } from '../ProgramScreen';
 
 const mapStateToProps = state => {
-  const { speakersRead, programRead, favorites } = state;
+  const { speakersRead, programRead, favoritesRead } = state;
 
   return {
     speakers: speakersRead.speakers,
-    favorites: favorites.favorites,
+    favorites: favoritesRead.favorites,
     title: 'MY PROGRAM',
     slotFilter: function slotFilter({ _key: key }) {
-      return get(favorites, ['favorites', key], false);
+      return get(favoritesRead, ['favorites', key], false);
     },
     program: programRead.program,
   };
