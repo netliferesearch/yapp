@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     marginBottom: theme.margins.sm,
   },
   times: font.smBold,
+  star: {
+    marginTop: theme.margins.sm,
+    marginBottom: theme.margins.sm,
+  },
 });
 
 export default styles;
