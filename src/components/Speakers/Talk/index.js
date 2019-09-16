@@ -11,7 +11,7 @@ import styles from './styles';
 
 const Talk = props => {
   const { navigation, type } = props;
-  const talkName = navigation.getParam('name', '');
+  const talkName = type === 'talk' ? navigation.getParam('talkName', '') : navigation.getParam('workshopName', '');
   const talkDescription =
     type === 'talk' ? navigation.getParam('talkDescription', '') : navigation.getParam('workshopDescription', '');
   const userImage = navigation.getParam('userImage', '');

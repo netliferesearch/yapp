@@ -14,9 +14,9 @@ import styles from './styles';
 
 export class SpeakerScreen extends React.Component {
   componentDidMount() {
-    this.willBlurSubscription = this.props.navigation.addListener('willBlur', () =>
+    this.willBlurSubscription = this.props.navigation.addListener('willBlur', payload =>
       // eslint-disable-next-line implicit-arrow-linebreak
-      BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid()),
+      BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid(payload)),
     );
   }
 
@@ -25,9 +25,11 @@ export class SpeakerScreen extends React.Component {
     this.willBlurSubscription && this.willBlurSubscription.remove();
   }
 
-  onBackButtonPressAndroid() {
+  onBackButtonPressAndroid(payload) {
     const { navigation } = this.props;
-    navigation.navigate('SpeakersScreen');
+    if (typeof payload.action.routeName === 'undefined') {
+      navigation.navigate('SpeakersScreen');
+    }
   }
 
   render() {
@@ -53,7 +55,8 @@ export class SpeakerScreen extends React.Component {
     const talkDescription = apiToValueChecker(speakerTalk, 'description') ? speakerTalk.description : null;
 
     const talkProps = {
-      name: talkName,
+      talkName,
+      workshopName,
       talkDescription,
       workshopDescription,
       slug: talkSlug,
