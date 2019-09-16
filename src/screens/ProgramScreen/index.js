@@ -38,10 +38,13 @@ export class ProgramScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { speakersRead, programRead } = state;
+  const { speakersRead, programRead, speakerWorkshopRead, speakerTalkRead, speakerExtraRead } = state;
   return {
     speakers: speakersRead.speakers,
     program: programRead.program,
+    speakerExtra: speakerExtraRead.speaker,
+    speakerWorkshop: speakerWorkshopRead.workshop,
+    speakerTalk: speakerTalkRead.talk,
   };
 };
 

@@ -22,6 +22,7 @@ export default function readProgram() {
           _type,
           title,
           foredragsholdere[]->{
+            _id,
             title,
             foredrag,
             employer,

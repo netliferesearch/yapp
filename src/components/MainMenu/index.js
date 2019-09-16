@@ -56,9 +56,9 @@ export default class MainMenu extends React.Component {
           <Hamburger open {...this.props} />
         </View>
         <View style={styles.navWrapper}>
-          {Object.keys(listItems).map(listItem => (
+          {Object.keys(listItems).map((listItem, i) => (
             <TouchableHighlight
-              key={`menu-item-${listItems[listItem].name}`}
+              key={`menu-item-${listItems[listItem].name}-${i}`}
               underlayColor="transparent"
               onPress={() => navigation.navigate(listItems[listItem].screen)}
             >

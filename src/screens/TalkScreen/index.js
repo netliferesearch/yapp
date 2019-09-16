@@ -2,13 +2,15 @@ import React from 'react';
 import { ScrollView, View, BackHandler } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 // Others
 import Header from '../../components/Header';
 import Talk from '../../components/Speakers/Talk';
+import apiToValueChecker from '../../utils/apiToValue';
 import styles from './styles';
 
-export default class TalkScreen extends React.Component {
+export class TalkScreen extends React.Component {
   componentDidMount() {
     this.willBlurSubscription = this.props.navigation.addListener('willBlur', payload =>
       // eslint-disable-next-line implicit-arrow-linebreak
@@ -21,10 +23,14 @@ export default class TalkScreen extends React.Component {
     this.willBlurSubscription && this.willBlurSubscription.remove();
   }
 
-  onBackButtonPressAndroid(payload) {
+  onBackButtonPressAndroid() {
     const { navigation } = this.props;
+    const routeName = apiToValueChecker(navigation, 'action', 'routeName');
+    const backbutton = apiToValueChecker(navigation, 'state', 'params', 'backbutton')
+      ? navigation.state.params.backbutton
+      : null;
 
-    if (typeof payload.action.routeName === 'undefined') {
+    if (!routeName && backbutton) {
       navigation.navigate('SpeakerScreen');
     }
   }
@@ -36,12 +42,25 @@ export default class TalkScreen extends React.Component {
       <ScrollView style={styles.screenWrapper}>
         <Header {...this.props} />
         <View style={styles.screenInnerWrapper}>
-          <Talk navigation={navigation} type="talk" />
+          <Talk navigation={navigation} type="talk" {...this.props} />
         </View>
       </ScrollView>
     );
   }
 }
+const mapStateToProps = state => {
+  const { speakerExtraRead, speakerWorkshopRead, speakerTalkRead } = state;
+  return {
+    speakerExtra: speakerExtraRead.speaker,
+    speakerWorkshop: speakerWorkshopRead.workshop,
+    speakerTalk: speakerTalkRead.talk,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null,
+)(TalkScreen);
 
 TalkScreen.defaultProps = {};
 

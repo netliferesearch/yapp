@@ -3,24 +3,35 @@ import React from 'react';
 import { Text, View, SectionList } from 'react-native';
 import propTypes from 'prop-types';
 import format from 'date-fns/format';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import readSpeakerExtra from '../../../actions/SpeakerAction';
+import readSpeakerWorkshop from '../../../actions/SpeakerWorkshopAction';
+import readSpeakerTalk from '../../../actions/SpeakerTalkAction';
 
 import schwartzianSort from '../../../utils/sortArrayByTime';
 import ProgramSlot from '../ProgramSlot';
 import getTracksFromSlots from '../../../utils/getTracksFromSlots';
 import styles from './styles';
 
-export default class ProgramDay extends React.Component {
+export class ProgramDay extends React.Component {
   constructor(props) {
     super(props);
     this.onSelect = this.onSelect.bind(this);
   }
 
   onSelect(slot) {
-    // console.log('clicked', slot);
+    const { navigation } = this.props;
+    if (slot && slot.uid) {
+      // We are underfetched. Fetch more content and navigate.
+      this.props.readSpeakerTalk(slot.uid);
+      this.props.readSpeakerExtra(slot.slug);
+      navigation.navigate('TalkScreen', slot);
+    }
   }
 
   render() {
-    const { slots, navigation } = this.props;
+    const { slots } = this.props;
     let sortedSlots = [];
 
     slots.map(track => {
@@ -55,7 +66,7 @@ export default class ProgramDay extends React.Component {
             style={styles.slot}
             sections={getTracksFromSlots(slots)}
             keyExtractor={slot => `program-slot-${slot._key}`}
-            renderItem={slot => <ProgramSlot slot={slot} onSelect={() => this.onSelect(slot)} />}
+            renderItem={slot => <ProgramSlot slot={slot} onSelect={programSlug => this.onSelect(programSlug)} />}
             renderSectionHeader={({ section: { index, title, startTime, endTime } }) => (
               <Text style={[styles.headingFont, styles.heading, index > 0 ? styles.headingExtraMargin : null]}>
                 {title.toUpperCase()}
@@ -70,6 +81,49 @@ export default class ProgramDay extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  const { speakerExtraRead, speakerWorkshopRead, speakerTalkRead } = state;
+  return {
+    speakerExtra: speakerExtraRead.speaker,
+    speakerWorkshop: speakerWorkshopRead.workshop,
+    speakerTalk: speakerTalkRead.talk,
+  };
+};
+
+// Make actions accessable from props
+// eslint-disable-next-line arrow-body-style
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      readSpeakerExtra,
+      readSpeakerWorkshop,
+      readSpeakerTalk,
+    },
+    dispatch,
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProgramDay);
+
+ProgramDay.defaultProps = {
+  speakerExtra: {},
+  speakerWorkshop: {},
+  speakerTalk: {},
+  readSpeakerExtra: () => {},
+  readSpeakerWorkshop: () => {},
+  readSpeakerTalk: () => {},
+};
+
 ProgramDay.propTypes = {
+  speakerExtra: propTypes.any,
+  speakerWorkshop: propTypes.any,
+  speakerTalk: propTypes.any,
+  readSpeakerExtra: propTypes.func,
+  readSpeakerWorkshop: propTypes.func,
+  readSpeakerTalk: propTypes.func,
   slots: propTypes.array.isRequired,
+  navigation: propTypes.shape().isRequired,
 };

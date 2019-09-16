@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
   titleFontProperties: {
     marginBottom: theme.margins.sm,
   },
+  titleFontSelectedProperties: {
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
+    textDecorationColor: theme.colors.black,
+  },
   times: font.smBold,
   star: {
     marginTop: theme.margins.sm,

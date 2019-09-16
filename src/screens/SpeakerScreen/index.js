@@ -53,7 +53,6 @@ export class SpeakerScreen extends React.Component {
     const talkName = apiToValueChecker(speakerTalk, 'title', 'nb') ? speakerTalk.title.nb : null;
     const talkSlug = apiToValueChecker(speakerTalk, 'slug', 'nb', 'current') ? speakerTalk.slug.nb.current : null;
     const talkDescription = apiToValueChecker(speakerTalk, 'description') ? speakerTalk.description : null;
-
     const talkProps = {
       talkName,
       workshopName,
@@ -66,6 +65,7 @@ export class SpeakerScreen extends React.Component {
       userAbout: about,
       userPosition: position,
       userEmployer: employer,
+      backbutton: true,
     };
 
     return (
@@ -74,12 +74,14 @@ export class SpeakerScreen extends React.Component {
         <View style={styles.screenInnerWrapper}>
           <View style={styles.heroWrapper}>
             <View style={styles.hero}>
-              <Text style={[styles.heroFont, styles.heroFontProperties]}>
-                {title
-                  .split(' ')
-                  .join('\n')
-                  .toUpperCase()}
-              </Text>
+              {title && (
+                <Text style={[styles.heroFont, styles.heroFontProperties]}>
+                  {title
+                    .split(' ')
+                    .join('\n')
+                    .toUpperCase()}
+                </Text>
+              )}
             </View>
             <View style={styles.heroImageWrapper}>
               {image && <Image style={styles.heroImage} source={{ uri: image }} resizeMode="cover" />}
