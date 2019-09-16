@@ -1,9 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { Text, View, SectionList } from 'react-native';
 import propTypes from 'prop-types';
+import format from 'date-fns/format';
+
 import schwartzianSort from '../../../utils/sortArrayByTime';
 import ProgramSlot from '../ProgramSlot';
+import getTracksFromSlots from '../../../utils/getTracksFromSlots';
 import styles from './styles';
 
 export default class ProgramDay extends React.Component {
@@ -48,11 +51,18 @@ export default class ProgramDay extends React.Component {
     return (
       <View style={styles.container}>
         {slots && (
-          <FlatList
+          <SectionList
             style={styles.slot}
-            data={sortedSlots}
-            keyExtractor={slot => `program-slot-${slot.trackKey}`}
+            sections={getTracksFromSlots(slots)}
+            keyExtractor={slot => `program-slot-${slot._key}`}
             renderItem={slot => <ProgramSlot slot={slot} onSelect={() => this.onSelect(slot)} />}
+            renderSectionHeader={({ section: { index, title, startTime, endTime } }) => (
+              <Text style={[styles.headingFont, styles.heading, index > 0 ? styles.headingExtraMargin : null]}>
+                {title.toUpperCase()}
+                {'\n'}
+                {format(new Date(startTime), 'kk:mm')}-{format(new Date(endTime), 'kk:mm')}
+              </Text>
+            )}
           />
         )}
       </View>
