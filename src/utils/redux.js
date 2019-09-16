@@ -1,4 +1,4 @@
-const actionType = {
+export default {
   speakersReadFulfilled: 'SPEAKERS_FETCHED',
   speakersReadRejected: 'SPEAKERS_REJECTED',
   speakerReadFulfilled: 'SPEAKER_FETCHED',
@@ -9,12 +9,9 @@ const actionType = {
   speakerReadTalkRejected: 'SPEAKER_TALK_REJECTED',
   sponsorsReadFulfilled: 'SPONSORS_FETCHED',
   sponsorsReadRejected: 'SPONSORS_REJECTED',
-  myProgramsReadFulfilled: 'MY_PROGRAMS_FETCHED',
-  myProgramsReadRejected: 'MY_PROGRAMS_REJECTED',
+  toggleFavorite: 'FAVORITES_TOGGLE',
   aboutArticleReadFulfilled: 'ABOUT_Y_ARTICLE_FETCHED',
   aboutArticleReadRejected: 'ABOUT_Y_ARTICLE_REJECTED',
   programReadFulfilled: 'PROGRAM_FETCHED',
   programReadRejected: 'PROGRAM_REJECTED',
 };
-
-export default actionType;

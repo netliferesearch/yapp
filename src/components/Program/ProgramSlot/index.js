@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
 import propTypes from 'prop-types';
 import format from 'date-fns/format';
 import Star from '../../../images/star';
@@ -9,9 +9,7 @@ import apiToValueChecker from '../../../utils/apiToValue';
 import styles from './styles';
 
 export const ProgramSlot = props => {
-  const { slot } = props;
-
-  // Set content variables for program slot and for deep linking props.
+  const { slot, isFavorite, toggleFavorite } = props;
   const programStart = apiToValueChecker(slot, 'item', 'startTime') ? slot.item.startTime : '';
   const programEnd = apiToValueChecker(slot, 'item', 'endTime') ? slot.item.endTime : null;
 
@@ -54,11 +52,9 @@ export const ProgramSlot = props => {
           {programStart && <Text style={styles.times}>{`${start}${programEnd && ' -'}`}</Text>}
           {programEnd && <Text style={styles.times}>{end}</Text>}
         </View>
-        <View style={styles.star}>
-          <TouchableHighlight onPress={() => console.log('toggle star')} underlayColor="transparent">
-            <Star checked={false} />
-          </TouchableHighlight>
-        </View>
+        <TouchableOpacity style={styles.star} onPress={() => toggleFavorite(slot.item._key)}>
+          <Star checked={isFavorite(slot.item._key)} />
+        </TouchableOpacity>
       </View>
       <View style={styles.rightColumn}>
         {uid ? (
@@ -91,9 +87,13 @@ export default ProgramSlot;
 
 ProgramSlot.defaultProps = {
   slot: {},
+  isFavorite: f => f,
+  toggleFavorite: f => f,
 };
 
 ProgramSlot.propTypes = {
-  slot: propTypes.shape(),
   onSelect: propTypes.func.isRequired,
+  slot: propTypes.shape(),
+  isFavorite: propTypes.func,
+  toggleFavorite: propTypes.func,
 };

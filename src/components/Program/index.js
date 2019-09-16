@@ -42,10 +42,20 @@ export default class Program extends React.Component {
   }
 
   printSelectedDay(program) {
+    const { isFavorite, toggleFavorite } = this.props;
     const { selectedDay } = this.state;
     const tab = program && apiToValueChecker(program, 'postTitle', 'nb') ? program.postTitle.nb : null;
     const slots = program && apiToValueChecker(program, 'slot') ? program.slot : null;
-    return tab === selectedDay ? <ProgramDay key="selected-day" slots={slots} {...this.props} /> : null;
+
+    return tab === selectedDay ? (
+      <ProgramDay
+        key="selected-day"
+        slots={slots}
+        isFavorite={isFavorite}
+        toggleFavorite={toggleFavorite}
+        {...this.props}
+      />
+    ) : null;
   }
 
   render() {
@@ -67,4 +77,6 @@ Program.defaultProps = {
 
 Program.propTypes = {
   program: propTypes.array,
+  isFavorite: propTypes.func.isRequired,
+  toggleFavorite: propTypes.func.isRequired,
 };

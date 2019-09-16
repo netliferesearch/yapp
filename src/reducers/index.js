@@ -6,7 +6,7 @@ import speakerExtraRead from './SpeakerReducer';
 import speakerWorkshopRead from './SpeakerWorkshopReducer';
 import speakerTalkRead from './SpeakerTalkReducer';
 import sponsorsRead from './SponsorsReducer';
-import myProgramsRead from './MyProgramsReducer';
+import favorites from './Favorites';
 import aboutArticleRead from './AboutReducer';
 import programRead from './ProgramReducer';
 
@@ -16,12 +16,12 @@ const appReducer = combineReducers({
   speakerWorkshopRead,
   speakerTalkRead,
   sponsorsRead,
-  myProgramsRead,
+  favorites,
   aboutArticleRead,
   programRead,
 });
 
 // eslint-disable-next-line no-undef
-export default rootReducer = (state, action) => {
+export default (rootReducer = (state, action) => {
   return appReducer(state, action);
-};
+});

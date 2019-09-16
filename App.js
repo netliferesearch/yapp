@@ -4,8 +4,9 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Provider } from 'react-redux';
 import { createDrawerNavigator, createAppContainer } from 'react-navigation';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import Store from './Store';
+import { store, persistor } from './Store';
 import MainMenu from './src/components/MainMenu';
 import StackNavigatorRoutes from './src/routes/StackNavigatorRoutes';
 import NetlifeSansYBold from './assets/fonts/NetlifeSansY-Bold.ttf';
@@ -43,13 +44,15 @@ export default class App extends React.Component {
     const { isReady } = this.state;
 
     return isReady ? (
-      <Provider store={Store}>
-        <StatusBar barStyle="light-content" />
-        <SafeAreaView style={theme.safeArea}>
-          <View style={theme.appWrapper}>
-            <AppContainer />
-          </View>
-        </SafeAreaView>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <StatusBar barStyle="light-content" />
+          <SafeAreaView style={theme.safeArea}>
+            <View style={theme.appWrapper}>
+              <AppContainer />
+            </View>
+          </SafeAreaView>
+        </PersistGate>
       </Provider>
     ) : (
       <AppLoading startAsync={this.loadFontsAsync} onFinish={() => this.setState({ isReady: true })} />

@@ -3,24 +3,17 @@ import React from 'react';
 import { Text, View, SectionList } from 'react-native';
 import propTypes from 'prop-types';
 import format from 'date-fns/format';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import readSpeakerExtra from '../../../actions/SpeakerAction';
 import readSpeakerWorkshop from '../../../actions/SpeakerWorkshopAction';
 import readSpeakerTalk from '../../../actions/SpeakerTalkAction';
 
-import schwartzianSort from '../../../utils/sortArrayByTime';
 import ProgramSlot from '../ProgramSlot';
 import getTracksFromSlots from '../../../utils/getTracksFromSlots';
 import styles from './styles';
 
-export class ProgramDay extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onSelect = this.onSelect.bind(this);
-  }
-
-  onSelect(slot) {
+class ProgramDay extends React.Component {
+  onSelect = slot => {
     const { navigation } = this.props;
     if (slot && slot.uid) {
       // We are underfetched. Fetch more content and navigate.
@@ -31,42 +24,26 @@ export class ProgramDay extends React.Component {
   }
 
   render() {
-    const { slots } = this.props;
-    let sortedSlots = [];
+    const { slots, navigation, isFavorite, toggleFavorite, slotFilter } = this.props;
 
-    slots.map(track => {
-      const startTime = typeof track.startTime !== 'undefined' ? track.startTime : null;
-      const endTime = typeof track.endTime !== 'undefined' ? track.endTime : null;
-      const trackSession = typeof track.session !== 'undefined' ? track.session : null;
-      const trackKey = typeof track._key !== 'undefined' ? track._key : null;
-
-      if (startTime && trackSession) {
-        sortedSlots.push({
-          trackKey,
-          startTime,
-          endTime,
-          session: trackSession,
-        });
-      }
-      return false;
-    });
-
-    sortedSlots = schwartzianSort(
-      sortedSlots,
-      i => {
-        return i.startTime;
-      },
-      true,
-    );
+    // filter only slots yielding a truthy value for the slotFilter predicate
+    const filteredSlots = (slots || []).filter(slotFilter);
 
     return (
       <View style={styles.container}>
-        {slots && (
+        {filteredSlots && (
           <SectionList
             style={styles.slot}
-            sections={getTracksFromSlots(slots)}
+            sections={getTracksFromSlots(filteredSlots)}
             keyExtractor={slot => `program-slot-${slot._key}`}
-            renderItem={slot => <ProgramSlot slot={slot} onSelect={programSlug => this.onSelect(programSlug)} />}
+            renderItem={slot => (
+              <ProgramSlot
+                slot={slot}
+                onSelect={programSlug => this.onSelect(programSlug)}
+                isFavorite={isFavorite}
+                toggleFavorite={toggleFavorite}
+              />
+            )}
             renderSectionHeader={({ section: { index, title, startTime, endTime } }) => (
               <Text style={[styles.headingFont, styles.heading, index > 0 ? styles.headingExtraMargin : null]}>
                 {title.toUpperCase()}
@@ -90,31 +67,23 @@ const mapStateToProps = state => {
   };
 };
 
-// Make actions accessable from props
-// eslint-disable-next-line arrow-body-style
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readSpeakerExtra,
-      readSpeakerWorkshop,
-      readSpeakerTalk,
-    },
-    dispatch,
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    readSpeakerExtra,
+    readSpeakerWorkshop,
+    readSpeakerTalk,
+  },
 )(ProgramDay);
 
 ProgramDay.defaultProps = {
   speakerExtra: {},
   speakerWorkshop: {},
   speakerTalk: {},
-  readSpeakerExtra: () => {},
-  readSpeakerWorkshop: () => {},
-  readSpeakerTalk: () => {},
+  readSpeakerExtra: f => f,
+  readSpeakerWorkshop: f => f,
+  readSpeakerTalk: f => f,
+  slotFilter: f => f,
 };
 
 ProgramDay.propTypes = {
@@ -126,4 +95,7 @@ ProgramDay.propTypes = {
   readSpeakerTalk: propTypes.func,
   slots: propTypes.array.isRequired,
   navigation: propTypes.shape().isRequired,
+  isFavorite: propTypes.func.isRequired,
+  toggleFavorite: propTypes.func.isRequired,
+  slotFilter: propTypes.func, // predicate used to filter slots
 };

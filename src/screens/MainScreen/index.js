@@ -3,9 +3,11 @@ import { ScrollView, View, Text } from 'react-native';
 // Redux and props
 import propTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+import { get } from 'lodash';
 import { connect } from 'react-redux';
 import readProgram from '../../actions/ProgramAction';
 import readSpeakers from '../../actions/SpeakersAction';
+import { toggleFavorite } from '../../actions/FavoritesAction';
 // Components
 import Header from '../../components/Header';
 import Hero from '../../components/Card/Hero';
@@ -26,6 +28,8 @@ export class MainScreen extends React.Component {
     this.props.readSpeakers();
   }
 
+  isFavorite = id => get(this.props, ['favorites', id])
+
   render() {
     return (
       <View style={styles.screenWrapper}>
@@ -39,7 +43,12 @@ export class MainScreen extends React.Component {
                 {`${convertUnicode('\u2193')} ${convertUnicode('\u2193')} ${convertUnicode('\u2193')}`}
               </Text>
             </View>
-            <Program {...this.props} />
+
+            <Program
+              {...this.props}
+              isFavorite={this.isFavorite}
+              toggleFavorite={this.props.toggleFavorite}
+            />
           </View>
         </ScrollView>
       </View>
@@ -47,38 +56,35 @@ export class MainScreen extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  const { speakersRead, programRead } = state;
+  const { speakersRead, programRead, favorites } = state;
+
   return {
     speakers: speakersRead.speakers,
     program: programRead.program,
+    favorites: favorites.favorites,
   };
-};
-
-// Make actions accessable from props
-// eslint-disable-next-line arrow-body-style
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readProgram,
-      readSpeakers,
-    },
-    dispatch,
-  );
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    readProgram,
+    readSpeakers,
+    toggleFavorite
+  },
 )(MainScreen);
 
 MainScreen.defaultProps = {
   program: [],
   speakers: [],
+  favorites: {},
 };
 
 MainScreen.propTypes = {
   program: propTypes.array,
   speakers: propTypes.array,
+  favorites: propTypes.object,
   readProgram: propTypes.func.isRequired,
   readSpeakers: propTypes.func.isRequired,
+  toggleFavorite: propTypes.func.isRequired,
 };
