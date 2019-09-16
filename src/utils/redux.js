@@ -13,6 +13,8 @@ const actionType = {
   myProgramsReadRejected: 'MY_PROGRAMS_REJECTED',
   aboutArticleReadFulfilled: 'ABOUT_Y_ARTICLE_FETCHED',
   aboutArticleReadRejected: 'ABOUT_Y_ARTICLE_REJECTED',
+  programReadFulfilled: 'PROGRAM_FETCHED',
+  programReadRejected: 'PROGRAM_REJECTED',
 };
 
 export default actionType;

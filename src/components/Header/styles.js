@@ -5,9 +5,10 @@ const styles = StyleSheet.create({
   headerContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingTop: 25,
-    paddingRight: 15,
-    paddingLeft: 15,
+    paddingTop: theme.margins.lg,
+    paddingRight: theme.margins.md,
+    paddingBottom: theme.margins.lg,
+    paddingLeft: theme.margins.md,
   },
 });
 

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../styles/theme';
+import { theme, font } from '../../styles/theme';
 
 const styles = StyleSheet.create({
   screenWrapper: {
@@ -12,6 +12,12 @@ const styles = StyleSheet.create({
     marginRight: theme.margins.md,
     marginLeft: theme.margins.md,
   },
+  intro: {
+    marginBottom: theme.margins.xl,
+    alignItems: 'center',
+  },
+  introHead: font.xlBold,
+  introArrow: font.mdBold,
 });
 
 export default styles;

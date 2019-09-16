@@ -41,14 +41,16 @@ export class Speakers extends React.Component {
             extraData={this.props}
             keyExtractor={speaker => `speaker-list${speaker._id}`}
             renderItem={speaker => (
-              <SpeakerList
-                speakers={speaker}
-                navigation={navigation}
-                speakerExtra={speakerExtra}
-                speakerWorkshop={speakerWorkshop}
-                speakerTalk={speakerTalk}
-                onSelect={speakerData => this.onSelect(speakerData)}
-              />
+              <React.Fragment>
+                <SpeakerList
+                  speakers={speaker}
+                  navigation={navigation}
+                  speakerExtra={speakerExtra}
+                  speakerWorkshop={speakerWorkshop}
+                  speakerTalk={speakerTalk}
+                  onSelect={speakerData => this.onSelect(speakerData)}
+                />
+              </React.Fragment>
             )}
           />
         )}
