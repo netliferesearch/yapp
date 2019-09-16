@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Y-Oslo",
-    "slug": "y-oslo",
+    "name": "Yapp",
+    "slug": "y-app",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": ["ios", "android"],
@@ -10,8 +10,8 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
