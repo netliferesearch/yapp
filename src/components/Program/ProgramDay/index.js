@@ -8,6 +8,7 @@ import readSpeakerExtra from '../../../actions/SpeakerAction';
 import readSpeakerWorkshop from '../../../actions/SpeakerWorkshopAction';
 import readSpeakerTalk from '../../../actions/SpeakerTalkAction';
 
+import EmptyProgram from '../EmptyProgram';
 import ProgramSlot from '../ProgramSlot';
 import getTracksFromSlots from '../../../utils/getTracksFromSlots';
 import styles from './styles';
@@ -36,6 +37,7 @@ class ProgramDay extends React.Component {
             style={styles.slot}
             sections={getTracksFromSlots(filteredSlots)}
             keyExtractor={slot => `program-slot-${slot._key}`}
+            ListEmptyComponent={(slots.length && !filteredSlots.length && EmptyProgram) || null}
             renderItem={slot => (
               <ProgramSlot
                 slot={slot}
