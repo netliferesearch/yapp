@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Text, Image, BackHandler } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,6 +13,23 @@ import Card from '../../components/Card';
 import styles from './styles';
 
 export class SpeakerScreen extends React.Component {
+  componentDidMount() {
+    this.willBlurSubscription = this.props.navigation.addListener('willBlur', () =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid()),
+    );
+  }
+
+  componentWillUnmount() {
+    // eslint-disable-next-line no-unused-expressions
+    this.willBlurSubscription && this.willBlurSubscription.remove();
+  }
+
+  onBackButtonPressAndroid() {
+    const { navigation } = this.props;
+    navigation.navigate('SpeakersScreen');
+  }
+
   render() {
     const { navigation, speakerExtra, speakerWorkshop, speakerTalk } = this.props;
 
