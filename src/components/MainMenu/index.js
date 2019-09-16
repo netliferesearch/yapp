@@ -19,7 +19,7 @@ export default class MainMenu extends React.Component {
           screen: 'ProgramScreen',
         },
         {
-          name: 'My Programs',
+          name: 'My Program',
           screen: 'MyProgramsScreen',
         },
         {
