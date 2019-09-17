@@ -4,7 +4,10 @@
     "slug": "yapp",
     "privacy": "public",
     "sdkVersion": "34.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,10 +19,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["assets/*", "assets/images/"],
+    "assetBundlePatterns": [
+      "assets/*",
+      "assets/images/"
+    ],
     "ios": {
       "bundleIdentifier": "com.netlife.yapp",
       "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 3,
+      "package": "com.netlife.yapp",
+      "permissions": []
     },
     "description": "A DESIGN, TECH AND INNOVATION DRIVEN CONFERENCE FOR THOSE WHO WANT TO SHAPE THE FUTURE.\n\nY is a big conference in the heart of Oslo, Youngstorget, September 25th-27th. We will cover topics within customer experience, design, innovation and technology.\n\nAt Y you will learn how to find the right problems, design and build services to solve them. Also organize better and grow the services we build - and last but not least: have FUN and meet other cool geeks.\n\nY is for everyone involved in making products and services in companies and organizations. Innovation teams, designers, UXers, business developers, digital managers or whatever you may call yourself.\n\nGet a full overview with the Y app. Read about our amazing speakers and collect your favoritt talks in a personalized schedule."
   }
