@@ -5,7 +5,7 @@ Y Oslo is built on Expo (React Native), Redux, React Navigation and Sanity for d
 
 # Requirements
 
-This project is using Expo. You need to have an account and download Expo app. This project was built on Node v10.
+This project is using Expo. You need to have an account and download Expo app. You should also have expo-cli installed globally. This project was built on Node v10, Expo-cli v3.0.10.
 
 # Functionality
 
@@ -16,15 +16,14 @@ App.js
 - Actions are stacked in categories. With that said, each file can have multiple actions.
 - Naming tip. CRUD (stands for Create, Read, Update, Delete) + what. Example: readSpeakers or updateSpeakers
   src/components
-- primitives folder contains all primitive components such as buttons, input fields etc.
 - Camel cased folders can contain several components. Each component in a parent folder. Example: Card/Hero or just Card.
-- All components has their own styled component style that can use global styles from theme, font etc.
+- All components can use their own styled component style file that can use global styles from theme, font etc. or could use global theme font directly in component.
   src/reducers
 - index.js is where you add all redux reducers for combining.
 - Reducer files are stacked in same type of categories as actions.
 - Naming tip. what + CRUD. Example: speakersRead or speakersUpdated.
   src/screens
-- Screen is a page/view that is routed with routes/StacknavigatorRoutes.js
+- Screen is a page/view that is routed with routes/StacknavigatorRoutes.js and components/MainMenu routes.
 - All Screens should have index.js where the screen logic should be.
 
 # Start and builds
@@ -36,6 +35,17 @@ This should open expo with QR-code. Tunnel has worked fine for us when developin
 # Good to know
 
 React native is still very young and will break easily when updating packages. Try to keep npm-packages to the minimum.
+
+# Updates
+
+Follow https://docs.expo.io/versions/latest/workflow/upgrading-expo-sdk-walkthrough/ when updating core.
+
+# Deploy
+
+This app is released on Appstore and Google play.
+Follow https://docs.expo.io/versions/v34.0.0/distribution/uploading-apps/.
+Important steps is to edit app.json version, build with expo, deploy with expo, test with alpha/beta test on google play and test with testflight on app store.
+App store is a bi\*\*ch. With that said. Make sure to calculate days, not hours when releasing. Also note that the app review can take a week or so.
 
 # YAPP - 2020
 

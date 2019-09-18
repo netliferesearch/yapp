@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
     marginTop: theme.margins.sm,
     marginBottom: theme.margins.sm,
   },
+  userNameFont: font.smRegular,
+  userName: {
+    marginTop: theme.margins.sm,
+    marginBottom: theme.margins.sm,
+  },
 });
 
 export default styles;

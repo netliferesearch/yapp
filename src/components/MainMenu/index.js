@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
 import propTypes from 'prop-types';
@@ -40,11 +41,18 @@ export default class MainMenu extends React.Component {
         },
       ],
     };
+    this.menuItemPressed = this.menuItemPressed.bind(this);
+  }
+
+  menuItemPressed(screen, isCurrentScreen) {
+    const { navigation } = this.props;
+
+    return isCurrentScreen ? navigation.closeDrawer() : navigation.navigate(screen);
   }
 
   render() {
     const { listItems } = this.state;
-    const { navigation } = this.props;
+    const { screenProps, navigation } = this.props;
 
     return (
       <View style={styles.main}>
@@ -52,18 +60,52 @@ export default class MainMenu extends React.Component {
           <Hamburger open {...this.props} />
         </View>
         <View style={styles.navWrapper}>
-          {Object.keys(listItems).map((listItem, i) => (
-            <TouchableHighlight
-              key={`menu-item-${listItems[listItem].name}-${i}`}
-              underlayColor="transparent"
-              onPress={() => navigation.navigate(listItems[listItem].screen)}
-            >
-              <View style={styles.listItemWrapper}>
-                <Text style={[styles.listItemFont, styles.listItem]}>{convertUnicode('\u2192')}</Text>
-                <Text style={[styles.listItemFont, styles.listItem]}>{listItems[listItem].name.toUpperCase()}</Text>
+          <View>
+            {Object.keys(listItems).map((listItem, i) => (
+              <TouchableHighlight
+                key={`menu-item-${listItems[listItem].name}-${i}`}
+                underlayColor="transparent"
+                onPress={() =>
+                  // eslint-disable-next-line implicit-arrow-linebreak
+                  this.menuItemPressed(
+                    listItems[listItem].screen,
+                    screenProps.activeItemKey === listItems[listItem].screen,
+                  )
+                }
+              >
+                <View style={styles.listItemWrapper}>
+                  <Text
+                    style={[
+                      styles.listItemFont,
+                      screenProps.activeItemKey === listItems[listItem].screen
+                        ? styles.listItemSelected
+                        : styles.listItem,
+                    ]}
+                  >
+                    {convertUnicode('\u2192')}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.listItemFont,
+                      screenProps.activeItemKey === listItems[listItem].screen
+                        ? styles.listItemSelected
+                        : styles.listItem,
+                    ]}
+                  >
+                    {listItems[listItem].name.toUpperCase()}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            ))}
+          </View>
+          <View style={styles.logo}>
+            <TouchableHighlight underlayColor="transparent" onPress={() => navigation.closeDrawer()}>
+              <View>
+                <Text style={[styles.logoFont, styles.logoFontColor]}>Y</Text>
+                <Text style={[styles.logoFont, styles.logoFontColor]}>Oslo</Text>
               </View>
             </TouchableHighlight>
-          ))}
+          </View>
         </View>
       </View>
     );
@@ -72,4 +114,5 @@ export default class MainMenu extends React.Component {
 
 MainMenu.propTypes = {
   navigation: propTypes.shape().isRequired,
+  screenProps: propTypes.shape().isRequired,
 };

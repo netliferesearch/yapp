@@ -17,7 +17,9 @@ import { theme } from './src/styles/theme';
 const MainMenuContainer = createDrawerNavigator(StackNavigatorRoutes, {
   drawerWidth: Dimensions.get('window').width,
   drawerPosition: 'right',
-  contentComponent: props => <MainMenu navigation={props.navigation} drawerProps={{ ...props }} />,
+  contentComponent: props => (
+    <MainMenu navigation={props.navigation} drawerProps={{ ...props }} screenProps={{ ...props }} />
+  ),
 });
 
 const AppContainer = createAppContainer(MainMenuContainer);

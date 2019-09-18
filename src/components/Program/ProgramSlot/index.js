@@ -58,7 +58,10 @@ export const ProgramSlot = props => {
                   </Text>
                 )}
               </View>
-              {programScene && <Text>{programScene}</Text>}
+              {userName && employer && (
+                <Text style={[styles.userName, styles.userNameFont]}>{`${userName} - ${employer}`}</Text>
+              )}
+              {programScene && <Text style={styles.userNameFont}>{programScene}</Text>}
             </React.Fragment>
           </TouchableHighlight>
         ) : (
@@ -66,7 +69,10 @@ export const ProgramSlot = props => {
             {programTitle && (
               <Text style={[styles.titleFont, styles.titleFontProperties]}>{programTitle.toUpperCase()}</Text>
             )}
-            {programScene && <Text>{programScene}</Text>}
+            {userName && employer && (
+              <Text style={[styles.userName, styles.userNameFont]}>{`${userName} - ${employer}`}</Text>
+            )}
+            {programScene && <Text style={styles.userNameFont}>{programScene}</Text>}
           </React.Fragment>
         )}
       </View>
