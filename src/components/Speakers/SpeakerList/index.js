@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, TouchableHighlight, Text, Image } from 'react-native';
 import propTypes from 'prop-types';
-import apiToValueChecker from '../../../utils/apiToValue';
+import { get } from 'lodash';
 import convertUnicode from '../../../utils/unicodeChars';
 import styles from './styles';
 
@@ -12,11 +12,12 @@ export default class SpeakerList extends React.Component {
     const { _id, title, position, image, employer, slug } = speakers.item;
 
     // Check that all speakerdata is in order.
-    const speakerTitle = apiToValueChecker(title, 'nb') ? title.nb : '';
-    const speakerPosition = apiToValueChecker(position, 'nb') ? position.nb : '';
+    const speakerTitle = get(title, 'nb', '');
+    const speakerPosition = get(position, 'nb', '');
     const speakerImage = typeof image === 'string' ? image : null;
-    const speakerEmployer = apiToValueChecker(employer, 'nb') ? employer.nb : '';
-    const speakerSlug = apiToValueChecker(slug, 'nb', 'current') ? slug.nb.current : '';
+    const speakerEmployer = get(employer, 'nb', '');
+    const speakerSlug = get(slug, 'nb.current', '');
+
     const speakerData = {
       title: speakerTitle,
       position: speakerPosition,

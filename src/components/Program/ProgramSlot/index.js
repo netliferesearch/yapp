@@ -2,38 +2,29 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
 import propTypes from 'prop-types';
+import { get } from 'lodash';
 import format from 'date-fns/format';
-import Star from '../../../images/star';
-import apiToValueChecker from '../../../utils/apiToValue';
 
+import Star from '../../../images/star';
 import styles from './styles';
 
 export const ProgramSlot = props => {
   const { slot, isFavorite, toggleFavorite } = props;
-  const programStart = apiToValueChecker(slot, 'item', 'startTime') ? slot.item.startTime : '';
-  const programEnd = apiToValueChecker(slot, 'item', 'endTime') ? slot.item.endTime : null;
 
-  const start = format(new Date(programStart), 'kk:mm');
-  const end = format(new Date(programEnd), 'kk:mm');
+  const programStart = get(slot, 'item.startTime', null);
+  const programEnd = get(slot, 'item.endTime', null);
+  const start = programStart ? format(new Date(programStart), 'kk:mm') : '';
+  const end = programEnd ? format(new Date(programEnd), 'kk:mm') : '';
 
-  const sessionObject = apiToValueChecker(slot, 'item', 'session') ? slot.item.session : null;
-
-  const programTitle = sessionObject && apiToValueChecker(sessionObject, 'title', 'nb') ? sessionObject.title.nb : null;
-  const programScene =
-    sessionObject && apiToValueChecker(sessionObject, 'scene', 'title', 'nb') ? sessionObject.scene.title.nb : null;
-  const programObject =
-    sessionObject && apiToValueChecker(sessionObject, 'foredragsholdere') ? sessionObject.foredragsholdere : null;
-  const programImage = programObject && apiToValueChecker(programObject[0], 'image') ? programObject[0].image : null;
-  const userName =
-    programObject && apiToValueChecker(programObject[0], 'title', 'nb') ? programObject[0].title.nb : null;
-  const userSlug =
-    programObject && apiToValueChecker(programObject[0], 'slug', 'nb', 'current')
-      ? programObject[0].slug.nb.current
-      : null;
-  const employer =
-    programObject && apiToValueChecker(programObject[0], 'employer', 'nb') ? programObject[0].employer.nb : null;
-
-  const uid = programObject && apiToValueChecker(programObject[0], '_id') ? programObject[0]._id : null;
+  const sessionObject = get(slot, 'item.session', {});
+  const programTitle = get(sessionObject, 'title.nb', null);
+  const programScene = get(sessionObject, 'scene.title.nb', null);
+  const programObject = get(sessionObject, 'foredragsholdere', []);
+  const programImage = get(programObject[0], 'image', null);
+  const userName = get(programObject[0], 'title.nb', null);
+  const userSlug = get(programObject[0], 'slug.nb.current', null);
+  const employer = get(programObject[0], 'employer.nb', null);
+  const uid = get(programObject[0], '_id', null);
 
   const programData = {
     talkName: programTitle,

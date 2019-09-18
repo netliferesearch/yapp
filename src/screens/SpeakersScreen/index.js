@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 // Others
 import Header from '../../components/Header';
 import Speakers from '../../components/Speakers';
-import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export const SpeakersScreen = props => {
   return (
-    <View style={styles.screenWrapper}>
+    <View style={screen.wrapper}>
       <Header {...props} />
-      <View style={styles.screenInnerWrapper}>
+      <View style={screen.innerWrapper}>
         <Speakers {...props} />
       </View>
     </View>

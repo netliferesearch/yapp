@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import readAboutArticle from '../../actions/AboutAction';
 // Components
@@ -12,6 +11,7 @@ import SanityBlockContent from '../../components/SanityBlockContent';
 // Others
 import apiToValueChecker from '../../utils/apiToValue';
 import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export class AboutYScreen extends React.Component {
   constructor(props) {
@@ -41,9 +41,9 @@ export class AboutYScreen extends React.Component {
     const body = typeof article.body !== 'undefined' ? article.body : {};
 
     return (
-      <View style={styles.screenWrapper}>
+      <View style={screen.wrapper}>
         <Header {...this.props} />
-        <ScrollView style={styles.screenInnerWrapper}>
+        <ScrollView style={screen.innerWrapper}>
           <View style={styles.blockContainer}>
             {longTitle && lead ? (
               <View>
@@ -63,7 +63,7 @@ export class AboutYScreen extends React.Component {
               </View>
             ) : (
               title && (
-                <Text style={[styles.sponsorFont, styles.sponsorFontProperties]}>
+                <Text style={[styles.titleFont, styles.titleFontProperties]}>
                   {title
                     .split(' ')
                     .join('\n')
@@ -86,18 +86,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readAboutArticle,
-    },
-    dispatch,
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { readAboutArticle },
 )(AboutYScreen);
 
 AboutYScreen.defaultProps = {

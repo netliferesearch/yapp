@@ -3,7 +3,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import propTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import readSpeakerExtra from '../../actions/SpeakerAction';
 import readSpeakerWorkshop from '../../actions/SpeakerWorkshopAction';
@@ -22,6 +21,7 @@ export class Speakers extends React.Component {
   onSelect(speakerData = null) {
     if (speakerData) {
       const { navigation } = this.props;
+      // We are underfetched here. Fetch speakerdata on slug and speaker id and navigate.
       this.props.readSpeakerExtra(speakerData.slug);
       this.props.readSpeakerWorkshop(speakerData.uid);
       this.props.readSpeakerTalk(speakerData.uid);
@@ -67,22 +67,13 @@ const mapStateToProps = state => {
   };
 };
 
-// Make actions accessable from props
-// eslint-disable-next-line arrow-body-style
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readSpeakerExtra,
-      readSpeakerWorkshop,
-      readSpeakerTalk,
-    },
-    dispatch,
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    readSpeakerExtra,
+    readSpeakerWorkshop,
+    readSpeakerTalk,
+  },
 )(Speakers);
 
 Speakers.defaultProps = {

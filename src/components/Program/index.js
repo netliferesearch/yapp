@@ -2,8 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import propTypes from 'prop-types';
-
-import apiToValueChecker from '../../utils/apiToValue';
+import { get } from 'lodash';
 import ProgramDay from './ProgramDay';
 import styles from './styles';
 
@@ -24,12 +23,12 @@ export default class Program extends React.Component {
 
   printTab(program) {
     const { selectedDay } = this.state;
+    const tab = get(program, 'postTitle.nb', null);
+    const key = get(program, '_key', null);
 
-    const tab = program && apiToValueChecker(program, 'postTitle', 'nb') ? program.postTitle.nb : null;
-    const key = program && apiToValueChecker(program, '_key') ? program._key : null;
     const selected = selectedDay === tab;
 
-    return tab !== 'Workshops' ? (
+    return tab && tab !== 'Workshops' ? (
       <TouchableHighlight key={key} underlayColor="transparent" onPress={() => this.pressedTab(tab)}>
         <View style={[styles.programTab, selected ? styles.programTabSelected : styles.programTabDefault]}>
           <Text style={[styles.tabFont, selected ? styles.tabFontPropertiesSelected : styles.tabFontProperties]}>
@@ -44,8 +43,9 @@ export default class Program extends React.Component {
   printSelectedDay(program) {
     const { isFavorite, toggleFavorite } = this.props;
     const { selectedDay } = this.state;
-    const tab = program && apiToValueChecker(program, 'postTitle', 'nb') ? program.postTitle.nb : null;
-    const slots = program && apiToValueChecker(program, 'slot') ? program.slot : null;
+
+    const tab = get(program, ['postTitle', 'nb'], null);
+    const slots = get(program, ['slot'], null);
 
     return tab === selectedDay ? (
       <ProgramDay
@@ -60,7 +60,7 @@ export default class Program extends React.Component {
 
   render() {
     const { program } = this.props;
-    const programs = apiToValueChecker(program[0], 'programArray') ? program[0].programArray : {};
+    const programs = get(program[0], ['programArray'], {});
 
     return (
       <View style={styles.programContainer}>

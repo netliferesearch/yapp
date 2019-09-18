@@ -16,16 +16,16 @@ import styles from './styles';
 class ProgramDay extends React.Component {
   onSelect = slot => {
     const { navigation } = this.props;
-    if (slot && slot.uid) {
-      // We are underfetched. Fetch more content and navigate.
-      this.props.readSpeakerTalk(slot.uid);
-      this.props.readSpeakerExtra(slot.slug);
+    if (slot) {
+      // We are underfetched here. Fetch more content by ids and navigate.
+      slot.uid && this.props.readSpeakerTalk(slot.uid);
+      slot.slug && this.props.readSpeakerExtra(slot.slug);
       navigation.navigate('TalkScreen', slot);
     }
-  }
+  };
 
   render() {
-    const { slots, navigation, isFavorite, toggleFavorite, slotFilter } = this.props;
+    const { slots, isFavorite, toggleFavorite, slotFilter } = this.props;
 
     // filter only slots yielding a truthy value for the slotFilter predicate
     const filteredSlots = (slots || []).filter(slotFilter);
@@ -48,9 +48,9 @@ class ProgramDay extends React.Component {
             )}
             renderSectionHeader={({ section: { index, title, startTime, endTime } }) => (
               <Text style={[styles.headingFont, styles.heading, index > 0 ? styles.headingExtraMargin : null]}>
-                {title.toUpperCase()}
+                {title && title.toUpperCase()}
                 {'\n'}
-                {format(new Date(startTime), 'kk:mm')}-{format(new Date(endTime), 'kk:mm')}
+                {startTime && format(new Date(startTime), 'kk:mm')}-{endTime && format(new Date(endTime), 'kk:mm')}
               </Text>
             )}
           />

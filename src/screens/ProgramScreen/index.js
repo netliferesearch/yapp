@@ -14,6 +14,7 @@ import Program from '../../components/Program';
 // Others
 import convertUnicode from '../../utils/unicodeChars';
 import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export class ProgramScreen extends React.Component {
   constructor(props) {
@@ -21,25 +22,21 @@ export class ProgramScreen extends React.Component {
     this.state = {};
   }
 
-  isFavorite = id => get(this.props, ['favorites', id])
+  isFavorite = id => get(this.props, ['favorites', id]);
 
   render() {
     return (
-      <View style={styles.screenWrapper}>
+      <View style={screen.wrapper}>
         <Header {...this.props} />
         <ScrollView>
-          <View style={styles.screenInnerWrapper}>
+          <View style={screen.innerWrapper}>
             <View style={styles.intro}>
               <Text style={styles.introHead}>{this.props.title}</Text>
               <Text style={styles.introArrow}>
                 {`${convertUnicode('\u2193')} ${convertUnicode('\u2193')} ${convertUnicode('\u2193')}`}
               </Text>
             </View>
-            <Program
-              {...this.props}
-              isFavorite={this.isFavorite}
-              toggleFavorite={this.props.toggleFavorite}
-            />
+            <Program {...this.props} isFavorite={this.isFavorite} toggleFavorite={this.props.toggleFavorite} />
           </View>
         </ScrollView>
       </View>

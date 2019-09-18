@@ -1,50 +1,53 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable implicit-arrow-linebreak */
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import propTypes from 'prop-types';
-import apiToValueChecker from '../../../utils/apiToValue';
+import { get } from 'lodash';
 import Card from '../../Card';
 import SanityBlockContent from '../../SanityBlockContent';
 
 import styles from './styles';
 
 const Talk = props => {
-  const { navigation, type, speakerExtra, speakerWorkshop, speakerTalk } = props;
-
-  const talkName = type === 'talk' ? navigation.getParam('talkName', null) : navigation.getParam('workshopName', null);
-
-  let talkDescription =
-    type === 'talk' ? navigation.getParam('talkDescription', null) : navigation.getParam('workshopDescription', null);
-  let userAbout = navigation.getParam('userAbout', null);
-
-  // Props can be left out in navigation props.
-  // Todo: Check if we can skip navigation props and go for speakerExtra, speakerWorkshop and speakerTalk.
-  if (!talkDescription) {
-    talkDescription = apiToValueChecker(speakerTalk, 'description') ? speakerTalk.description : null;
-  }
-
-  if (!userAbout) {
-    userAbout = apiToValueChecker(speakerExtra, 'about', 'nb') ? speakerExtra.about.nb : null;
-  }
+  const { navigation, type, speakerExtra, speakerTalk } = props;
 
   const userImage = navigation.getParam('userImage', null);
+
+  let talkName = null;
+  let talkDescription = null;
 
   let userName = navigation.getParam('userName', null);
   let userPosition = navigation.getParam('userPosition', null);
   let userEmployer = navigation.getParam('userEmployer', null);
+  let userAbout = navigation.getParam('userAbout', null);
+
+  if (type === 'talk') {
+    talkName = navigation.getParam('talkName', null);
+    talkDescription = navigation.getParam('talkDescription', null);
+  } else {
+    talkName = navigation.getParam('workshopName', null);
+    talkDescription = navigation.getParam('workshopDescription', null);
+  }
+
+  // Props can be left out in navigation props and might be set in props.
+  // TODO: Could we skip navigation params and rely on redux props?
+  if (!talkDescription) {
+    talkDescription = get(speakerTalk, 'description', null);
+  }
+
+  if (!userAbout) {
+    userAbout = get(speakerExtra, 'about.nb', null);
+  }
 
   if (!userName) {
-    userName = apiToValueChecker(speakerExtra, 'title', 'nb') ? speakerExtra.title.nb : null;
+    userName = get(speakerExtra, 'title.nb', null);
   }
 
   if (!userPosition) {
-    userPosition = apiToValueChecker(speakerExtra, 'position', 'nb') ? speakerExtra.position.nb : null;
+    userPosition = get(speakerExtra, 'position.nb', null);
   }
 
   if (!userEmployer) {
-    userEmployer = apiToValueChecker(speakerExtra, 'employer', 'nb') ? speakerExtra.employer.nb : null;
+    userEmployer = get(speakerExtra, 'position.nb', null);
   }
 
   return (
@@ -65,7 +68,6 @@ const Talk = props => {
       )}
       <View style={styles.content}>
         {talkDescription &&
-          typeof talkDescription === 'object' &&
           // eslint-disable-next-line react/no-array-index-key
           talkDescription.map((desc, i) => <SanityBlockContent key={`talkDesc-${i}`} blocks={desc.introArray.nb} />)}
       </View>
@@ -85,9 +87,14 @@ const Talk = props => {
 
 export default Talk;
 
-Talk.defaultProps = {};
+Talk.defaultProps = {
+  speakerExtra: {},
+  speakerTalk: {},
+};
 
 Talk.propTypes = {
   type: propTypes.string.isRequired,
+  speakerExtra: propTypes.shape(),
+  speakerTalk: propTypes.shape(),
   navigation: propTypes.shape().isRequired,
 };

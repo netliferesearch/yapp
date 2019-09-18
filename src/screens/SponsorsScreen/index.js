@@ -3,15 +3,14 @@ import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import readSponsors from '../../actions/SponsorsAction';
 // Components
 import Header from '../../components/Header';
 import Sponsor from '../../components/Sponsor';
 // Others
-
 import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export class SponsorsScreen extends React.Component {
   constructor(props) {
@@ -68,10 +67,11 @@ export class SponsorsScreen extends React.Component {
 
   render() {
     const { superPartners, mainPartners, partners } = this.state;
+
     return (
-      <View style={styles.screenWrapper}>
+      <View style={screen.wrapper}>
         <Header {...this.props} />
-        <ScrollView style={styles.screenInnerWrapper}>
+        <ScrollView style={screen.innerWrapper}>
           <View style={styles.partnersContainer}>
             <Text style={[styles.sponsorFont, styles.sponsorFontProperties]}>SUPER PARTNER</Text>
             {Object.keys(superPartners).map(i => this.renderSponsors(superPartners[i], 'superpartner', i))}
@@ -97,18 +97,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      readSponsors,
-    },
-    dispatch,
-  );
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    readSponsors,
+  },
 )(SponsorsScreen);
 
 SponsorsScreen.defaultProps = {

@@ -3,12 +3,12 @@ import { ScrollView, View, BackHandler } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 
 // Others
 import Header from '../../components/Header';
 import Talk from '../../components/Speakers/Talk';
-import apiToValueChecker from '../../utils/apiToValue';
-import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export class TalkScreen extends React.Component {
   componentDidMount() {
@@ -25,10 +25,8 @@ export class TalkScreen extends React.Component {
 
   onBackButtonPressAndroid() {
     const { navigation } = this.props;
-    const routeName = apiToValueChecker(navigation, 'action', 'routeName');
-    const backbutton = apiToValueChecker(navigation, 'state', 'params', 'backbutton')
-      ? navigation.state.params.backbutton
-      : null;
+    const routeName = get(navigation, 'action.routeName', null);
+    const backbutton = get(navigation, 'state.params.backbutton', null);
 
     if (!routeName && backbutton) {
       navigation.navigate('SpeakerScreen');
@@ -39,9 +37,9 @@ export class TalkScreen extends React.Component {
     const { navigation } = this.props;
 
     return (
-      <ScrollView style={styles.screenWrapper}>
+      <ScrollView style={screen.wrapper}>
         <Header {...this.props} />
-        <View style={styles.screenInnerWrapper}>
+        <View style={screen.innerWrapper}>
           <Talk navigation={navigation} type="talk" {...this.props} />
         </View>
       </ScrollView>

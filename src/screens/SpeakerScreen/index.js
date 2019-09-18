@@ -11,6 +11,7 @@ import SanityBlockContent from '../../components/SanityBlockContent';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export class SpeakerScreen extends React.Component {
   componentDidMount() {
@@ -69,9 +70,9 @@ export class SpeakerScreen extends React.Component {
     };
 
     return (
-      <ScrollView style={styles.screenWrapper}>
+      <ScrollView style={screen.wrapper}>
         <Header {...this.props} />
-        <View style={styles.screenInnerWrapper}>
+        <View style={screen.innerWrapper}>
           <View style={styles.heroWrapper}>
             <View style={styles.hero}>
               {title && (

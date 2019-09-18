@@ -6,7 +6,7 @@ import propTypes from 'prop-types';
 // Others
 import Header from '../../components/Header';
 import Talk from '../../components/Speakers/Talk';
-import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export default class WorkshopScreen extends React.Component {
   componentDidMount() {
@@ -33,17 +33,15 @@ export default class WorkshopScreen extends React.Component {
     const { navigation } = this.props;
 
     return (
-      <ScrollView style={styles.screenWrapper}>
+      <ScrollView style={screen.wrapper}>
         <Header {...this.props} />
-        <View style={styles.screenInnerWrapper}>
+        <View style={screen.innerWrapper}>
           <Talk navigation={navigation} type="workshop" />
         </View>
       </ScrollView>
     );
   }
 }
-
-WorkshopScreen.defaultProps = {};
 
 WorkshopScreen.propTypes = {
   navigation: propTypes.shape().isRequired,

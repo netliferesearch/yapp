@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 // Redux and props
 import propTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 import readProgram from '../../actions/ProgramAction';
@@ -15,6 +14,7 @@ import Program from '../../components/Program';
 // Other
 import convertUnicode from '../../utils/unicodeChars';
 import styles from './styles';
+import { screen } from '../../styles/theme';
 
 export class MainScreen extends React.Component {
   constructor(props) {
@@ -28,15 +28,15 @@ export class MainScreen extends React.Component {
     this.props.readSpeakers();
   }
 
-  isFavorite = id => get(this.props, ['favorites', id])
+  isFavorite = id => get(this.props, ['favorites', id]);
 
   render() {
     return (
-      <View style={styles.screenWrapper}>
+      <View style={screen.wrapper}>
         <Header {...this.props} infoText />
         <ScrollView>
           <Hero />
-          <View style={styles.innerWrapper}>
+          <View style={screen.innerWrapper}>
             <View style={styles.intro}>
               <Text style={styles.introHead}>PROGRAM</Text>
               <Text style={styles.introArrow}>
@@ -44,11 +44,7 @@ export class MainScreen extends React.Component {
               </Text>
             </View>
 
-            <Program
-              {...this.props}
-              isFavorite={this.isFavorite}
-              toggleFavorite={this.props.toggleFavorite}
-            />
+            <Program {...this.props} isFavorite={this.isFavorite} toggleFavorite={this.props.toggleFavorite} />
           </View>
         </ScrollView>
       </View>
@@ -70,7 +66,7 @@ export default connect(
   {
     readProgram,
     readSpeakers,
-    toggleFavorite
+    toggleFavorite,
   },
 )(MainScreen);
 
