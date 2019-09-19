@@ -10,7 +10,7 @@ import rootReducer from './src/reducers';
 const persistConfig = {
   key: 'root',
   storage: ExpoFileSystemStorage,
-  whitelist: ['favorites'], // only favorites will be persisted
+  whitelist: ['favoritesRead'], // only favoritesRead will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

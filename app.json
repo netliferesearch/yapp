@@ -22,7 +22,7 @@
       "supportsTablet": false
     },
     "android": {
-      "versionCode": 3,
+      "versionCode": 8,
       "package": "com.netlife.yapp",
       "permissions": []
     },
