@@ -18,7 +18,12 @@ const BlockRenderer = props => {
     case 'normal':
     default:
       markup = (
-        <Text style={[font.smRegular, { marginTop: theme.margins.md, marginBottom: theme.margins.xs }]}>
+        <Text
+          style={[
+            font.smRegular,
+            { marginTop: theme.margins.md, marginBottom: theme.margins.xs, lineHeight: theme.margins.lg },
+          ]}
+        >
           {props.children}
         </Text>
       );

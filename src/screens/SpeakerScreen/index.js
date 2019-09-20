@@ -4,9 +4,9 @@ import { ScrollView, View, Text, Image, BackHandler } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 
 // Others
-import apiToValueChecker from '../../utils/apiToValue';
 import SanityBlockContent from '../../components/SanityBlockContent';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
@@ -44,16 +44,17 @@ export class SpeakerScreen extends React.Component {
     const employer = navigation.getParam('employer', null);
 
     // Speaker extra props data.
-    const about = apiToValueChecker(speakerExtra, 'about', 'nb') ? speakerExtra.about.nb : null;
+    const about = get(speakerExtra, 'about.nb', null);
     // Speaker workshop props data.
-    const workshopName = apiToValueChecker(speakerWorkshop, 'title', 'nb') ? speakerWorkshop.title.nb : null;
-    const workshopSlug = apiToValueChecker(speakerWorkshop, 'slug', 'nb') ? speakerWorkshop.slug.nb : null;
-    const workshopDescription = apiToValueChecker(speakerWorkshop, 'description') ? speakerWorkshop.description : null;
+    const workshopName = get(speakerWorkshop, 'title.nb', null);
+    const workshopSlug = get(speakerWorkshop, 'slug.nb', null);
+    const workshopDescription = get(speakerWorkshop, 'description', null);
 
     // Speaker talk props data.
-    const talkName = apiToValueChecker(speakerTalk, 'title', 'nb') ? speakerTalk.title.nb : null;
-    const talkSlug = apiToValueChecker(speakerTalk, 'slug', 'nb', 'current') ? speakerTalk.slug.nb.current : null;
-    const talkDescription = apiToValueChecker(speakerTalk, 'description') ? speakerTalk.description : null;
+    const talkName = get(speakerTalk, 'title.nb', null);
+    const talkSlug = get(speakerTalk, 'slug.nb.current', null);
+    const talkDescription = get(speakerTalk, 'description', null);
+
     const talkProps = {
       talkName,
       workshopName,

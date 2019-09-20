@@ -3,13 +3,13 @@ import { ScrollView, View, Text } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 import readAboutArticle from '../../actions/AboutAction';
 // Components
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SanityBlockContent from '../../components/SanityBlockContent';
 // Others
-import apiToValueChecker from '../../utils/apiToValue';
 import styles from './styles';
 import { screen } from '../../styles/theme';
 
@@ -35,10 +35,11 @@ export class AboutYScreen extends React.Component {
 
   render() {
     const { article } = this.props;
-    const title = apiToValueChecker(article, 'title', 'nb') ? article.title.nb : null;
-    const longTitle = apiToValueChecker(article, 'longTitle', 'nb') ? article.longTitle.nb : null;
-    const lead = apiToValueChecker(article, 'lead', 'nb') ? article.lead.nb : null;
-    const body = typeof article.body !== 'undefined' ? article.body : {};
+
+    const title = get(article, 'title.nb', null);
+    const longTitle = get(article, 'longTitle.nb', null);
+    const lead = get(article, 'lead.nb', null);
+    const body = get(article, 'body', null);
 
     return (
       <View style={screen.wrapper}>
@@ -72,7 +73,7 @@ export class AboutYScreen extends React.Component {
               )
             )}
           </View>
-          <View style={styles.blockContainer}>{Object.keys(body).map(() => this.renderBody(body))}</View>
+          {body && <View style={styles.blockContainer}>{Object.keys(body).map(() => this.renderBody(body))}</View>}
         </ScrollView>
       </View>
     );

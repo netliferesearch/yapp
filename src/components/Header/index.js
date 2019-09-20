@@ -9,7 +9,7 @@ const Header = props => {
   const { infoText } = props;
   return (
     <View style={styles.headerContainer}>
-      <TopText {...props} text={['Y', 'Oslo']} />
+      <TopText {...props} text={['Y', 'Oslo']} isLogo={true} />
       {infoText && <TopText {...props} text={['Youngstorget', '25.09 - 27.09.2019']} />}
       <Hamburger open={false} {...props} />
     </View>

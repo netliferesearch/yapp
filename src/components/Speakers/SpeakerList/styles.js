@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { theme, font } from '../../../styles/theme';
 
 const styles = StyleSheet.create({
@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.black,
   },
   imageWrapper: {
-    width: '30%',
-    height: '100%',
+    width: Dimensions.get('window').width < 480 ? 87 : 111,
+    height: Dimensions.get('window').width < 480 ? 87 : 111,
   },
   image: {
     flex: 1,
     alignSelf: 'stretch',
-    width: 96,
-    height: 96,
+    width: Dimensions.get('window').width < 480 ? 72 : 96,
+    height: Dimensions.get('window').width < 480 ? 72 : 96,
   },
   textWrapper: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, Dimensions } from 'react-native';
 import propTypes from 'prop-types';
 import convertUnicode from '../../utils/unicodeChars';
 import styles from './styles';
@@ -14,7 +14,7 @@ const Card = props => {
       style={[
         styles.card,
         { backgroundColor: backgroundBlack ? theme.colors.black : theme.colors.green },
-        isTwoThirds && { width: '66.666666666%' },
+        isTwoThirds && Dimensions.get('window').width > 480 && { width: '66.666666666%' },
       ]}
     >
       <TouchableHighlight underlayColor="transparent" onPress={() => props.pressed()}>
@@ -34,7 +34,7 @@ const Card = props => {
             <Text
               style={[
                 switchFontSizes
-                  ? [font.xlBold, { marginBottom: theme.margins.xl }]
+                  ? [font.xlBoldCards, { marginBottom: theme.margins.xl }]
                   : [font.smBold, { marginBottom: theme.margins.md }],
                 backgroundBlack && { color: theme.colors.white },
                 align && { textAlign: align },
@@ -46,7 +46,7 @@ const Card = props => {
           {text && (
             <Text
               style={[
-                switchFontSizes ? font.smRegular : font.xlBold,
+                switchFontSizes ? font.smRegular : font.xlBoldCards,
                 backgroundBlack && { color: theme.colors.white },
                 align && { textAlign: align },
               ]}

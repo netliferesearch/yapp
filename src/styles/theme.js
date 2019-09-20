@@ -60,6 +60,11 @@ const font = {
     fontSize: theme.fontSize.xl,
     lineHeight: theme.fontSize.xl,
   },
+  xlBoldCards: {
+    fontFamily: theme.fontFamily.bold,
+    fontSize: 32,
+    lineHeight: 38,
+  },
 };
 
 const screen = {

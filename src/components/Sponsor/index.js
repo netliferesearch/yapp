@@ -1,15 +1,15 @@
 import React from 'react';
 import { TouchableHighlight, View, Image, Linking } from 'react-native';
 import propTypes from 'prop-types';
-import apiToValueChecker from '../../utils/apiToValue';
+import { get } from 'lodash';
 import styles from './styles';
 
 const Sponsor = props => {
   const { sponsor, partnerLevel } = props;
-  const image = apiToValueChecker(sponsor, 'sponsor', 'image') ? sponsor.sponsor.image : null;
-  const link = apiToValueChecker(sponsor, 'sponsor', 'link') ? sponsor.sponsor.link : null;
-  const title = apiToValueChecker(sponsor, 'sponsor', 'title', 'nb') ? sponsor.sponsor.title.nb : null;
-  const level = apiToValueChecker(sponsor, 'level') ? sponsor.level : null;
+  const image = get(sponsor, 'sponsor.image', null);
+  const link = get(sponsor, 'sponsor.link', null);
+  const title = get(sponsor, 'sponsor.title.nb', null);
+  const level = get(sponsor, 'level', null);
 
   return (
     <View>

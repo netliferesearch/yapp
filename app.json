@@ -19,7 +19,8 @@
     "assetBundlePatterns": ["assets/*", "assets/images/"],
     "ios": {
       "bundleIdentifier": "com.netlife.yapp",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "buildNumber": "1.0.2"
     },
     "android": {
       "versionCode": 8,

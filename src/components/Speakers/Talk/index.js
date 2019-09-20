@@ -54,16 +54,18 @@ const Talk = props => {
     <React.Fragment>
       {talkName && (
         <View style={styles.content}>
-          <Card
-            text={talkName
-              .split(' ')
-              .join('\n')
-              .toUpperCase()}
-            options={{
-              align: 'left',
-              isTwoThirds: true,
-            }}
-          />
+          <View style={{ flexDirection: 'row' }}>
+            <Card
+              text={talkName
+                .split(' ')
+                .join('\n')
+                .toUpperCase()}
+              options={{
+                align: 'left',
+                isTwoThirds: true,
+              }}
+            />
+          </View>
         </View>
       )}
       <View style={styles.content}>
