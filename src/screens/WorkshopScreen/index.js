@@ -2,13 +2,15 @@ import React from 'react';
 import { ScrollView, View, BackHandler } from 'react-native';
 // Props and Redux
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
 
 // Others
 import Header from '../../components/Header';
 import Talk from '../../components/Speakers/Talk';
 import { screen } from '../../styles/theme';
 
-export default class WorkshopScreen extends React.Component {
+export class WorkshopScreen extends React.Component {
   componentDidMount() {
     this.willBlurSubscription = this.props.navigation.addListener('willBlur', payload =>
       // eslint-disable-next-line implicit-arrow-linebreak
@@ -21,10 +23,12 @@ export default class WorkshopScreen extends React.Component {
     this.willBlurSubscription && this.willBlurSubscription.remove();
   }
 
-  onBackButtonPressAndroid(payload) {
+  onBackButtonPressAndroid() {
     const { navigation } = this.props;
+    const routeName = get(navigation, 'action.routeName', null);
+    const backbutton = get(navigation, 'state.params.backbutton', null);
 
-    if (typeof payload.action.routeName === 'undefined') {
+    if (!routeName && backbutton) {
       navigation.navigate('SpeakerScreen');
     }
   }
@@ -36,12 +40,27 @@ export default class WorkshopScreen extends React.Component {
       <ScrollView style={screen.wrapper}>
         <Header {...this.props} />
         <View style={screen.innerWrapper}>
-          <Talk navigation={navigation} type="workshop" />
+          <Talk navigation={navigation} type="workshop" {...this.props} />
         </View>
       </ScrollView>
     );
   }
 }
+const mapStateToProps = state => {
+  const { speakerExtraRead, speakerWorkshopRead, speakerTalkRead } = state;
+  return {
+    speakerExtra: speakerExtraRead.speaker,
+    speakerWorkshop: speakerWorkshopRead.workshop,
+    speakerTalk: speakerTalkRead.talk,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null,
+)(WorkshopScreen);
+
+WorkshopScreen.defaultProps = {};
 
 WorkshopScreen.propTypes = {
   navigation: propTypes.shape().isRequired,

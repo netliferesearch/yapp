@@ -8,46 +8,23 @@ import SanityBlockContent from '../../SanityBlockContent';
 import styles from './styles';
 
 const Talk = props => {
-  const { navigation, type, speakerExtra, speakerTalk } = props;
+  const { navigation, type, speakerExtra, speakerTalk, speakerWorkshop } = props;
 
   const userImage = navigation.getParam('userImage', null);
 
   let talkName = null;
   let talkDescription = null;
-
-  let userName = navigation.getParam('userName', null);
-  let userPosition = navigation.getParam('userPosition', null);
-  let userEmployer = navigation.getParam('userEmployer', null);
-  let userAbout = navigation.getParam('userAbout', null);
+  const userName = get(speakerExtra, 'title.nb', null);
+  const userPosition = get(speakerExtra, 'position.nb', null);
+  const userEmployer = get(speakerExtra, 'employer.nb', null);
+  const userAbout = get(speakerExtra, 'about.nb', null);
 
   if (type === 'talk') {
-    talkName = navigation.getParam('talkName', null);
-    talkDescription = navigation.getParam('talkDescription', null);
-  } else {
-    talkName = navigation.getParam('workshopName', null);
-    talkDescription = navigation.getParam('workshopDescription', null);
-  }
-
-  // Props can be left out in navigation props and might be set in props.
-  // TODO: Could we skip navigation params and rely on redux props?
-  if (!talkDescription) {
+    talkName = get(speakerTalk, 'title.nb', null);
     talkDescription = get(speakerTalk, 'description', null);
-  }
-
-  if (!userAbout) {
-    userAbout = get(speakerExtra, 'about.nb', null);
-  }
-
-  if (!userName) {
-    userName = get(speakerExtra, 'title.nb', null);
-  }
-
-  if (!userPosition) {
-    userPosition = get(speakerExtra, 'position.nb', null);
-  }
-
-  if (!userEmployer) {
-    userEmployer = get(speakerExtra, 'position.nb', null);
+  } else {
+    talkName = get(speakerWorkshop, 'title.nb', null);
+    talkDescription = get(speakerWorkshop, 'description', null);
   }
 
   return (
@@ -92,11 +69,13 @@ export default Talk;
 Talk.defaultProps = {
   speakerExtra: {},
   speakerTalk: {},
+  speakerWorkshop: {},
 };
 
 Talk.propTypes = {
   type: propTypes.string.isRequired,
   speakerExtra: propTypes.shape(),
   speakerTalk: propTypes.shape(),
+  speakerWorkshop: propTypes.shape(),
   navigation: propTypes.shape().isRequired,
 };

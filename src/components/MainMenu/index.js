@@ -46,7 +46,6 @@ export default class MainMenu extends React.Component {
 
   menuItemPressed(screen, isCurrentScreen) {
     const { navigation } = this.props;
-
     return isCurrentScreen ? navigation.closeDrawer() : navigation.navigate(screen);
   }
 

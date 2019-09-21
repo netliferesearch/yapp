@@ -30,7 +30,7 @@ export class Speakers extends React.Component {
   }
 
   render() {
-    const { speakers, speakerExtra, navigation, speakerWorkshop, speakerTalk } = this.props;
+    const { speakers } = this.props;
 
     return (
       <React.Fragment>
@@ -42,14 +42,7 @@ export class Speakers extends React.Component {
             keyExtractor={speaker => `speaker-list${speaker._id}`}
             renderItem={speaker => (
               <React.Fragment>
-                <SpeakerList
-                  speakers={speaker}
-                  navigation={navigation}
-                  speakerExtra={speakerExtra}
-                  speakerWorkshop={speakerWorkshop}
-                  speakerTalk={speakerTalk}
-                  onSelect={speakerData => this.onSelect(speakerData)}
-                />
+                <SpeakerList speakers={speaker} onSelect={speakerData => this.onSelect(speakerData)} />
               </React.Fragment>
             )}
           />
@@ -78,9 +71,6 @@ export default connect(
 
 Speakers.defaultProps = {
   speakers: {},
-  speakerExtra: {},
-  speakerWorkshop: {},
-  speakerTalk: {},
   readSpeakerExtra: () => {},
   readSpeakerWorkshop: () => {},
   readSpeakerTalk: () => {},
@@ -88,9 +78,6 @@ Speakers.defaultProps = {
 
 Speakers.propTypes = {
   speakers: propTypes.any,
-  speakerExtra: propTypes.any,
-  speakerWorkshop: propTypes.any,
-  speakerTalk: propTypes.any,
   readSpeakerExtra: propTypes.func,
   readSpeakerWorkshop: propTypes.func,
   readSpeakerTalk: propTypes.func,

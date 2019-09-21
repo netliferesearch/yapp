@@ -19,6 +19,7 @@ class ProgramDay extends React.Component {
     if (slot) {
       // We are underfetched here. Fetch more content by ids and navigate.
       slot.uid && this.props.readSpeakerTalk(slot.uid);
+      slot.uid && this.props.readSpeakerWorkshop(slot.uid);
       slot.slug && this.props.readSpeakerExtra(slot.slug);
       navigation.navigate('TalkScreen', slot);
     }

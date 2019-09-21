@@ -14,7 +14,7 @@ const Card = props => {
       style={[
         styles.card,
         { backgroundColor: backgroundBlack ? theme.colors.black : theme.colors.green },
-        isTwoThirds && Dimensions.get('window').width > 480 && { width: '66.666666666%' },
+        isTwoThirds && Dimensions.get('window').width > 375 && { minWidth: '66.666666666%' },
       ]}
     >
       <TouchableHighlight underlayColor="transparent" onPress={() => props.pressed()}>

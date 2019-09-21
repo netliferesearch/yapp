@@ -35,7 +35,6 @@ export class SpeakerScreen extends React.Component {
 
   render() {
     const { navigation, speakerExtra, speakerWorkshop, speakerTalk } = this.props;
-
     // Initial load from components/Speakers with pressed list data.
     const title = navigation.getParam('title', null);
     const image = navigation.getParam('image', null);
