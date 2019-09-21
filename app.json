@@ -20,7 +20,7 @@
     "ios": {
       "bundleIdentifier": "com.netlife.yapp",
       "supportsTablet": false,
-      "buildNumber": "1.0.2"
+      "buildNumber": "1.0.3"
     },
     "android": {
       "versionCode": 8,

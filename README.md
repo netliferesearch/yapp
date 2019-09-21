@@ -48,20 +48,28 @@ The first time you build the app for android you'll be asked if you "would like 
 6. Create a new release and upload the `.aab` file
 7. 💰
 
-# Good to know
+### iOS
+Follow the release steps at Follow https://docs.expo.io/versions/v34.0.0/distribution/uploading-apps/.
+You need to login at https://appleid.apple.com and create "App specific password".
+Make sure to have xcode (10.3) open.
+Change version number at app.json and iterate ios build number for each ios upload.
+Your build will eventually be uploaded at https://appstoreconnect.apple.com.
 
-React native is still very young and will break easily when updating packages. Try to keep npm-packages to the minimum.
 
-# Updates
-
-Follow https://docs.expo.io/versions/latest/workflow/upgrading-expo-sdk-walkthrough/ when updating core.
-
-# Deploy
+# Deploy general release notes
 
 This app is released on Appstore and Google play.
 Follow https://docs.expo.io/versions/v34.0.0/distribution/uploading-apps/.
 Important steps is to edit app.json version, build with expo, deploy with expo, test with alpha/beta test on google play and test with testflight on app store.
 App store is a bi\*\*ch. With that said. Make sure to calculate days, not hours when releasing. Also note that the app review can take a week or so.
+
+# Updates
+
+Follow https://docs.expo.io/versions/latest/workflow/upgrading-expo-sdk-walkthrough/ when updating core.
+
+# Good to know
+
+React native is still very young and will break easily when updating packages. Try to keep npm-packages to the minimum.
 
 # YAPP - 2020
 
