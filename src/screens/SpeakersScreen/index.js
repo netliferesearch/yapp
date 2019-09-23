@@ -13,7 +13,7 @@ export const SpeakersScreen = props => {
   return (
     <View style={screen.wrapper}>
       <Header {...props} />
-      <View style={screen.innerWrapper}>
+      <View style={[screen.innerWrapper, { marginBottom: 100 }]}>
         <Speakers {...props} />
       </View>
     </View>

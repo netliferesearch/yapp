@@ -1,9 +1,12 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { theme, font } from '../../styles/theme';
+import { StyleSheet } from 'react-native';
+import { theme } from '../../styles/theme';
 
 const styles = StyleSheet.create({
-  speakers: {
+  listContainer: {
     marginBottom: theme.margins.md,
+  },
+  speakers: {
+    marginBottom: theme.margins.sm,
   },
 });
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 // React, RN
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import readSpeakerExtra from '../../actions/SpeakerAction';
@@ -33,7 +33,7 @@ export class Speakers extends React.Component {
     const { speakers } = this.props;
 
     return (
-      <React.Fragment>
+      <View style={styles.listContainer}>
         {speakers && (
           <FlatList
             style={styles.speakers}
@@ -47,7 +47,7 @@ export class Speakers extends React.Component {
             )}
           />
         )}
-      </React.Fragment>
+      </View>
     );
   }
 }
