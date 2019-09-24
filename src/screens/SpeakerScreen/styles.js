@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   heroImage: {
-    width: 236,
-    height: 167,
+    height: 180,
     marginTop: -100,
-    marginLeft: 50,
+    marginLeft: 20,
+    transform: [{ rotate: '-2deg' }],
   },
   content: {
     flex: 1,

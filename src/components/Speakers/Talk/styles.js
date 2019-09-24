@@ -2,10 +2,8 @@ import { StyleSheet } from 'react-native';
 import { theme, font } from '../../../styles/theme';
 
 const styles = StyleSheet.create({
-  heroImage: {
-    width: '80%',
-    height: 180,
-  },
+  heroImageWrapper: {},
+  heroImage: { width: 250, height: 250 },
   content: {
     flex: 1,
     flexDirection: 'column',

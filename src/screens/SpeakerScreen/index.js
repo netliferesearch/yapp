@@ -85,7 +85,7 @@ export class SpeakerScreen extends React.Component {
               )}
             </View>
             <View style={styles.heroImageWrapper}>
-              {image && <Image style={styles.heroImage} source={{ uri: image }} resizeMode="cover" />}
+              {image && <Image style={styles.heroImage} source={{ uri: image }} resizeMode="contain" />}
             </View>
           </View>
           {about && (

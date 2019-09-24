@@ -14,7 +14,7 @@ export default class SpeakerList extends React.Component {
     // Check that all speakerdata is in order.
     const speakerTitle = get(title, 'nb', '');
     const speakerPosition = get(position, 'nb', '');
-    const speakerImage = typeof image === 'string' ? `${image}?w=236` : null;
+    const speakerImage = typeof image === 'string' ? `${image}?h=500` : null;
     const speakerEmployer = get(employer, 'nb', '');
     const speakerSlug = get(slug, 'nb.current', '');
 

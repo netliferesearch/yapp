@@ -53,7 +53,7 @@ const Talk = props => {
       <View style={styles.content}>
         {userImage && (
           <View style={styles.heroImageWrapper}>
-            <Image style={styles.heroImage} source={{ uri: userImage }} resizeMode="cover" />
+            <Image style={styles.heroImage} source={{ uri: userImage }} resizeMode="contain" />
           </View>
         )}
         {userName && <Text style={[styles.userNameFont, styles.userNameProperties]}>{userName}</Text>}
