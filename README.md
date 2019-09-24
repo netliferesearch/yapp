@@ -35,26 +35,29 @@ This should open expo with QR-code. Tunnel has worked fine for us when developin
 ## Building for production
 
 ### Android
+
 In order for Google Play to accept your app bundle, you'll need to sign it with the same keystore that was used for the initial build. The keystore resides in the `Yapp` vault in Netlife Designs 1Password account. In case you want to verify the file, the md5 sum is: `197b0fa87fe2524e01ac98863fc4d308`.
 
 The first time you build the app for android you'll be asked if you "would like to upload a keystore or have expo handle it for you" – choose to upload one. In the wizard it'll ask you to provide it with path to keystore (the jks file you got from 1Password) in addition to keystore alias, keystore password and key password. The three last ones can be found on the item in 1Password.
 
-*Building*
+_Building_
+
 1. Do your changes
 2. Increase the `versionCode` in app.json
 3. Issue the build command: `expo build:android -t app-bundle`
+   Use this command when deploying for the first time: `expo build:android --clear-credentials`
 4. Wait for the build to finish. When it says `✔ Build finished`, click the link in the bottom of the console (an `.aab` file should download)
 5. Log into the Play Console with the `drift@netlife.com` Google account
 6. Create a new release and upload the `.aab` file
 7. 💰
 
 ### iOS
+
 Follow the release steps at Follow https://docs.expo.io/versions/v34.0.0/distribution/uploading-apps/.
 You need to login at https://appleid.apple.com and create "App specific password".
 Make sure to have xcode (10.3) open.
 Change version number at app.json and iterate ios build number for each ios upload.
 Your build will eventually be uploaded at https://appstoreconnect.apple.com.
-
 
 # Deploy general release notes
 
